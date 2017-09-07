@@ -57,12 +57,12 @@ public class MainApp extends Application {
         Rectangle top = new Rectangle(x, y, width, height);
         switch (color) {
         case 1:
-            top.setStroke(Color.FIREBRICK);
-            top.setFill(Color.FIREBRICK);
+            top.setStroke(new Color(0.5, 0.8, 0.5, 1));
+            top.setFill(new Color(0.8, 0.5, 0.5, 1));
             break;
         case -1:
-            top.setStroke(Color.AQUA);
-            top.setFill(Color.AQUA);
+            top.setStroke(new Color(0.5, 0.8, 0.5, 1));
+            top.setFill(new Color(0.5, 0.5, 0.8, 1));
             break;
         default:
             break;
@@ -78,12 +78,12 @@ public class MainApp extends Application {
         Rectangle bottom = new Rectangle(x, y + height, width, height);
         switch (color) {
         case -1:
-            bottom.setStroke(Color.FIREBRICK);
-            bottom.setFill(Color.FIREBRICK);
+            bottom.setStroke(new Color(0.5, 0.5, 0.8, 1));
+            bottom.setFill(new Color(0.5, 0.8, 0.5, 1));
             break;
         case 1:
-            bottom.setStroke(Color.AQUA);
-            bottom.setFill(Color.AQUA);
+            bottom.setStroke(new Color(0.5, 0.8, 0.5, 1));
+            bottom.setFill(new Color(0.5, 0.5, 0.8, 1));
             break;
         default:
             break;
