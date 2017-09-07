@@ -1,0 +1,7 @@
+package snippet;
+
+public class Snippet {
+    halfer(pane, newR, x, y / 2, minR, direction);
+                halfer(pane, newR, x, y * 1.5, minR, direction);
+}
+
