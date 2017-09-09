@@ -1,19 +1,10 @@
 package Opgave4Kreativ;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -96,18 +87,4 @@ public class MainApp extends Application {
         }
     }
 
-    private Color randomColor() {
-        Color[] colors = { Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.DARKSLATEBLUE, Color.DARKKHAKI,
-                Color.OLIVE, Color.BEIGE };
-        int r = randomInteger(0, colors.length - 1);
-        return colors[r];
-    }
-
-    private int randomInteger(int min, int max) {
-        int result = 0;
-        int diff = max - min;
-        Random random = new Random();
-        result = random.nextInt(diff + 1);
-        return result;
-    }
 }
