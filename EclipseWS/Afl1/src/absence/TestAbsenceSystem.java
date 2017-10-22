@@ -9,13 +9,18 @@ public class TestAbsenceSystem {
 
 		AbsenceSystem absenceSystem = new AbsenceSystem();
 		absenceSystem.printAbsence(absence17t);
+		System.out.println();
 		System.out.printf("Gennemsnitlig Fravær for elev nummer %s er %s dage per måned.%n", 3,
 				absenceSystem.averageMonth(absence17t, 3));
+		System.out.println();
 		System.out.printf("Den mest fraværende elev er elev nummer %s.%n", absenceSystem.mostAbsentStudent(absence17t));
+		System.out.println();
 		System.out.printf("%s elever har ikke haft noget fravær.%n",
 				absenceSystem.studentWithoutAbsenceCount(absence17t));
+		System.out.println();
 		System.out.printf("Elev nummer %s har været fraværende i alt %s dage.%n", 3,
 				absenceSystem.totalAbsence(absence17t, 3));
+		System.out.println();
 		absenceSystem.reset(absence17t, 4);
 		absenceSystem.printAbsence(absence17t);
 	}

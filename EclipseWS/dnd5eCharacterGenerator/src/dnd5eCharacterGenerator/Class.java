@@ -98,4 +98,8 @@ public class Class {
 	public void addEquipment(Equipment e) {
 		equipment.add(e);
 	}
+
+	public int getSkills() {
+		return skills;
+	}
 }

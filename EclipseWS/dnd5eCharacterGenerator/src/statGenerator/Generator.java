@@ -9,6 +9,27 @@ public class Generator {
 
 	public Generator() {
 		stats = new int[6];
+	}
+
+	public void printStats() {
+		System.out.printf("|%02d|", stats[0]);
+		for (int i = 1; i < 6; i++) {
+			System.out.printf("%02d|", stats[i]);
+		}
+	}
+
+	public void ironmanGen() {
+		for (int i = 0; i < stats.length; i++) {
+			stats[i] = dieRoller(1, 6);
+		}
+	}
+
+	public int dieRoller(int min, int max) {
+		Random rand = new Random();
+		return rand.nextInt(max - min) + min;
+	}
+
+	public void cardGen() {
 		deck = new ArrayList<>();
 		deck.add(1);
 		deck.add(1);
@@ -28,16 +49,6 @@ public class Generator {
 		deck.add(6);
 		deck.add(6);
 		deck.add(6);
-	}
-
-	public void printStats() {
-		System.out.printf("|%02d|", stats[0]);
-		for (int i = 1; i < 6; i++) {
-			System.out.printf("%02d|", stats[i]);
-		}
-	}
-
-	public void generate() {
 		Random rand = new Random();
 		int counter = 0;
 		while (deck.size() != 0) {

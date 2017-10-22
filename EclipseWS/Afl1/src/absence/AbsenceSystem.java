@@ -5,6 +5,7 @@ public class AbsenceSystem {
 	 * Print the absence table on the screen
 	 */
 	public void printAbsence(int[][] absence) {
+		System.out.println("______________Fraværs Tabel______________");
 		System.out.println("|Mo||01|02|03|04|05|06|07|08|09|10|11|12|");
 		System.out.println("|St||___________________________________|");
 		for (int i = 0; i < absence.length; i++) {
@@ -21,7 +22,7 @@ public class AbsenceSystem {
 	 * 12 months.
 	 */
 	public int totalAbsence(int[][] absence, int studentNumber) {
-		if (studentNumber <= absence.length) {
+		if (studentNumber <= absence.length && studentNumber > 0) {
 			int sum = 0;
 			for (int d : absence[studentNumber - 1]) {
 				sum += d;

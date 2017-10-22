@@ -5,13 +5,21 @@ import java.util.ArrayList;
 public class Character {
 
 	private String name;
+	private int level;
+	private Race race;
 	private Class charClass;
 	private Archetype archetype;
-	private int level;
+	private ArrayList<Skill> skills;
 
 	private ArrayList<Feature> featureList() {
 		ArrayList<Feature> result = new ArrayList<>();
-		for (Feature f : charClass.getFeatures()) {
+
+		ArrayList<Feature> collective = new ArrayList<>();
+		collective.addAll(race.getFeatures());
+		collective.addAll(charClass.getFeatures());
+		collective.addAll(archetype.getFeatures());
+		collective.sort((o1, o2) -> o1.getLevel() - o2.getLevel());
+		for (Feature f : collective) {
 			if (f.getLevel() <= level) {
 				if (f.getImprovement() != null && f.getImprovement().getLevel() <= level) {
 					Feature test = f.getImprovement();
@@ -35,8 +43,13 @@ public class Character {
 		return content;
 	}
 
+	public void addSkill(Skill s) {
+		skills.add(s);
+	}
+
 	public Character(String name) {
 		this.name = name;
+		skills = new ArrayList<>();
 		setLevel(1);
 	}
 
@@ -62,6 +75,30 @@ public class Character {
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	public Archetype getArchetype() {
+		return archetype;
+	}
+
+	public void setArchetype(Archetype archetype) {
+		this.archetype = archetype;
+	}
+
+	public Race getRace() {
+		return race;
+	}
+
+	public void setRace(Race race) {
+		this.race = race;
+	}
+
+	public String skillsToString() {
+		String result = "";
+		for (Skill s : skills) {
+			result += String.format("%s, ", s.getName());
+		}
+		return result;
 	}
 
 }

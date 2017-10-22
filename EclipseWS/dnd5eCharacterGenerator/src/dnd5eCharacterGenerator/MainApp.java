@@ -1,5 +1,6 @@
 package dnd5eCharacterGenerator;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -8,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -22,6 +25,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
 	public static void main(String[] args) {
+		System.out.println("Test");
 		Application.launch(args);
 	}
 
@@ -32,6 +36,12 @@ public class MainApp extends Application {
 		initContent(pane);
 
 		Scene scene = new Scene(pane);
+		try {
+			System.out.println(new File(".").getCanonicalPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -49,6 +59,7 @@ public class MainApp extends Application {
 	private TextField txfLevel;
 	private Label lblChoice;
 	private Button btnSave;
+	private Button btnChsRace;
 
 	private void initContent(GridPane pane) {
 		// show or hide grid lines
@@ -80,11 +91,15 @@ public class MainApp extends Application {
 		// Button to show and choose skills
 		btnChsSkills = new Button("Show Skills");
 		pane.add(btnChsSkills, 3, 2);
+		// Button to show and choose race
+		btnChsRace = new Button("Show Races");
+		pane.add(btnChsRace, 4, 2);
 		// Button to show features
 		btnShowCharacter = new Button("Show Character");
 		pane.add(btnShowCharacter, 2, 3);
 		// Textfield to set and show level
 		txfLevel = new TextField("1");
+		txfLevel.setStyle("");
 		pane.add(txfLevel, 0, 3);
 		// Button to change level
 		btnSetLvl = new Button("Set Level");
@@ -95,6 +110,7 @@ public class MainApp extends Application {
 		btnChsSkills.setOnAction(event -> this.controller.chooseSkillsAction());
 		btnChsClass.setOnAction(event -> this.controller.chooseClassAction());
 		btnChsArchetype.setOnAction(event -> this.controller.chooseArchetypeAction());
+		btnChsRace.setOnAction(event -> this.controller.chooseRaceAction());
 		btnShowCharacter.setOnAction(event -> this.controller.showCharacterAction());
 		btnSetLvl.setOnAction(event -> this.controller.setLevelAction());
 		btnSave.setOnAction(event -> this.controller.saveFile());
@@ -118,8 +134,9 @@ public class MainApp extends Application {
 		private Ability charis = new Ability("Charisma");
 
 		public void saveFile() {
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			ArrayList<String> lines = new ArrayList<>();
+			JsonElement tree = gson.toJsonTree(character);
 			lines.add(gson.toJson(character));
 			Path file = Paths.get("test.json");
 			try {
@@ -137,6 +154,7 @@ public class MainApp extends Application {
 		private boolean showClasses = false;
 		private boolean showArchtypes = false;
 		private boolean showSkills = false;
+		private boolean showRaces = false;
 
 		private void createVighter() {
 			Class c1 = new Class("Vighter", d10, streng, dexter, 2);
@@ -195,6 +213,8 @@ public class MainApp extends Application {
 			a1.addFeature(af5);
 			a1.addFeature(af6);
 
+			c1.addArchetype(a1);
+
 			Skill s1 = new Skill("Acrobatics", "Make amazing acrobatics!", dexter);
 			Skill s2 = new Skill("Animal Handling", "Train and handle animals", wisdom);
 			Skill s3 = new Skill("Ahtletics", "Jump and climb", streng);
@@ -215,6 +235,35 @@ public class MainApp extends Application {
 
 			d.addClass(c1);
 
+			Race r1 = new Race("Lizardfolk");
+			Feature rf1 = new Feature("Bite",
+					"Your fanged maw is a natural weapon which you are proficient with. It deals 1d6 points of piercing damage.",
+					0);
+			Feature rf2 = new Feature("Cunning Artisan",
+					"During a short rest you can create simple equipment from dead creatures.", 0);
+			Feature rf3 = new Feature("Hold Breath", "You can hold your breath for 15 minutes.", 0);
+			Feature rf4 = new Feature("Hunters Lore",
+					"You are proficient in two of: Animal Handling, Nature, Perception, Stealth or Survival", 0);
+			Feature rf5 = new Feature("Natural Amor(13+Dex)",
+					"You have a natural armor of 13 + your Dexterity modifier.", 0);
+			Feature rf6 = new Feature("Hungry Jaws",
+					"Once per short rest you can as a bonus action make an attack with your bite, and gain temporary hitpoints equal to your Constitution modifier.",
+					0);
+			Feature rf7 = new Feature("Languages", "You speak, read and write Common and Draconic", 0);
+
+			r1.addFeature(rf1);
+			r1.addFeature(rf2);
+			r1.addFeature(rf3);
+			r1.addFeature(rf4);
+			r1.addFeature(rf5);
+			r1.addFeature(rf6);
+			r1.addFeature(rf7);
+
+			r1.addAbsi(consti, 2);
+			r1.addAbsi(wisdom, 1);
+
+			d.addRace(r1);
+
 		}
 
 		private void chooseClassAction() {
@@ -224,13 +273,17 @@ public class MainApp extends Application {
 					txaInfo.setText("You chose a class");
 					character.setCharClass(d.getClasses().get(choice - 1));
 				}
+				btnChsClass.setText("Show Classes");
+				showClasses = false;
 			} else {
 				showClasses = true;
 				String content = "";
 				int i = 1;
 				for (Class c : this.d.getClasses()) {
 					content += i + ". " + c.getName() + "\n";
+					i++;
 				}
+				btnChsClass.setText("Choose Class");
 				txaInfo.setText(content);
 			}
 
@@ -238,23 +291,82 @@ public class MainApp extends Application {
 
 		private void chooseArchetypeAction() {
 			if (showArchtypes) {
-
+				int choice = Integer.parseInt(txfChoice.getText());
+				ArrayList<Archetype> testList = character.getCharClass().getArchetypes();
+				if (choice <= testList.size()) {
+					txaInfo.setText("You chose an archetype");
+					character.setArchetype(testList.get(choice - 1));
+				}
+				showArchtypes = false;
+				btnChsArchetype.setText("Show Archetypes");
 			} else {
-
+				String content = "";
+				int i = 1;
+				for (Archetype a : character.getCharClass().getArchetypes()) {
+					content += i + ". " + a.getName() + "\n";
+					i++;
+				}
+				txaInfo.setText(content);
+				btnChsArchetype.setText("Choose Archetype");
+				showArchtypes = true;
 			}
 		}
 
 		private void chooseSkillsAction() {
 			if (showSkills) {
-
+				ArrayList<Skill> testList = character.getCharClass().getSkillList();
+				String choice = txfChoice.getText().trim();
+				String[] choices = choice.split(",");
+				for (String s : choices) {
+					int test = Integer.parseInt(s);
+					if (test <= testList.size()) {
+						character.addSkill(testList.get(test - 1));
+					}
+				}
+				showSkills = false;
+				btnChsSkills.setText("Show Skills");
 			} else {
+				String content = "";
+				int i = 1;
+				for (Skill s : character.getCharClass().getSkillList()) {
+					content += i + ". " + s.getName() + "\n";
+					i++;
+				}
+				content += String.format("As your input give a comma seperated list of %s numbers.%n",
+						character.getCharClass().getSkills());
+				txaInfo.setText(content);
+				showSkills = true;
+				btnChsSkills.setText("Choose skills");
+			}
+		}
 
+		public void chooseRaceAction() {
+			if (showRaces) {
+				int choice = Integer.parseInt(txfChoice.getText());
+				ArrayList<Race> testList = d.getRaces();
+				if (choice <= testList.size()) {
+					txaInfo.setText("You chose a race");
+					character.setRace(testList.get(choice - 1));
+				}
+				btnChsRace.setText("Show Races");
+				showRaces = false;
+			} else {
+				String content = "";
+				int i = 1;
+				for (Race r : d.getRaces()) {
+					content += i + ". " + r.getName() + "\n";
+					i++;
+				}
+				txaInfo.setText(content);
+				btnChsRace.setText("Choose Race");
+				showRaces = true;
 			}
 		}
 
 		private void showCharacterAction() {
-			String content = String.format("Name: %s%nClass: %s%nLevel: %s%n%nFeatures:%n%s", character.getName(),
+			String content = String.format("Name: %s%nClass: %s%nLevel: %s%n%nFeatures:%n%s%n", character.getName(),
 					character.getCharClass().getName(), character.getLevel(), character.featuresToString());
+			content += String.format("Proficiencies: %n%s%n", character.skillsToString());
 			txaInfo.setText(content);
 		}
 
