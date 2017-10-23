@@ -3,6 +3,7 @@ package dnd5eCharacterGenerator;
 public class Feature {
 	private String name;
 	private String desc;
+	private String fullDesc;
 	private Feature improvement;
 	private int level;
 
@@ -10,6 +11,7 @@ public class Feature {
 		this.desc = desc;
 		this.name = name;
 		this.level = level;
+		setFullDesc("");
 	}
 
 	public int getLevel() {
@@ -38,6 +40,14 @@ public class Feature {
 
 	public void setImprovement(Feature improvement) {
 		this.improvement = improvement;
+	}
+
+	public String getFullDesc() {
+		return fullDesc;
+	}
+
+	public void setFullDesc(String fullDesc) {
+		this.fullDesc = fullDesc;
 	}
 
 }
