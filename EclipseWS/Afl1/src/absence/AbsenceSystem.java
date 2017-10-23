@@ -5,7 +5,7 @@ public class AbsenceSystem {
 	 * Print the absence table on the screen
 	 */
 	public void printAbsence(int[][] absence) {
-		System.out.println("______________Fraværs Tabel______________");
+		System.out.println("______________FRAVÆRS TABEL______________");
 		System.out.println("|Mo||01|02|03|04|05|06|07|08|09|10|11|12|");
 		System.out.println("|St||___________________________________|");
 		for (int i = 0; i < absence.length; i++) {
@@ -47,9 +47,7 @@ public class AbsenceSystem {
 	public int studentWithoutAbsenceCount(int[][] absence) {
 		int count = 0;
 		for (int i = 1; i <= absence.length; i++) {
-			if (totalAbsence(absence, i) == 0) {
-				count++;
-			}
+			count += totalAbsence(absence, i) == 0 ? 1 : 0;
 		}
 		return count;
 	}
@@ -75,7 +73,7 @@ public class AbsenceSystem {
 	 * Resets the absence to 0 for the given student during the last 12 months.
 	 */
 	public void reset(int[][] absence, int studentNumber) {
-		if (studentNumber <= absence.length) {
+		if (studentNumber <= absence.length && studentNumber != 0) {
 			for (int i = 0; i < absence[studentNumber - 1].length; i++) {
 				absence[studentNumber - 1][i] = 0;
 			}
