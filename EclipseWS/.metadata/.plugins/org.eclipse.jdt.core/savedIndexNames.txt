@@ -1,4 +1,6 @@
 INDEX VERSION 1.130+C:\Users\aadum\Datamagi\EclipseWS\.metadata\.plugins\org.eclipse.jdt.core
+1067094681.index
+3979307381.index
 822972710.index
 3948771246.index
 3380403084.index
@@ -17,12 +19,6 @@ INDEX VERSION 1.130+C:\Users\aadum\Datamagi\EclipseWS\.metadata\.plugins\org.ecl
 698954386.index
 956752177.index
 683504269.index
-<<<<<<< HEAD
-3979307381.index
-1554799930.index
-784660107.index
-2981372727.index
-=======
 3333624737.index
 784660107.index
 3433396620.index
@@ -30,7 +26,6 @@ INDEX VERSION 1.130+C:\Users\aadum\Datamagi\EclipseWS\.metadata\.plugins\org.ecl
 802207380.index
 955459938.index
 1817446190.index
->>>>>>> 032e68e43afa0986b68eb31238792840d9454027
 1053353612.index
 2396838687.index
 948919066.index
