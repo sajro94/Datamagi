@@ -13,7 +13,7 @@
 	<item value="1040" key="org.eclipse.jdt.uiformatter_pagemodify_dialog.preferred_height"/>
 	<item value="4" key="clean_up_save_particpant_modify_dialog.last_focus"/>
 	<item value="2" key="org.eclipse.jdt.uiformatter_page.line_wrapping_tab_page.last_category_index"/>
-	<item value="C:\Eclipse\eclipse_oxygen" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="C:\Users\Flemming\Datamagi\EclipseWS" key="org.eclipse.jdt.ui.lastextjar"/>
 	<item value="154" key="org.eclipse.jdt.uiformatter_page.white_space.java_view.inner"/>
 	<item value="0" key="org.eclipse.jdt.ui.last.selected.jre.kind2"/>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
@@ -76,7 +76,7 @@
 	<section name="javadoc">
 		<item value="package" key="access"/>
 		<item value="false" key="noindex"/>
-		<item value="C:\Users\Flemming\Datamagi\EclipseWS\AlgorithmerMedDie\javadoc.xml" key="antpath"/>
+		<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 17\javadoc.xml" key="antpath"/>
 		<item value="false" key="nodeprecatedlist"/>
 		<item value="true" key="use"/>
 		<item value="true" key="author"/>
@@ -90,19 +90,129 @@
 		<item value="true" key="splitindex"/>
 		<item value="true" key="fromStandard"/>
 		<item value="false" key="notree"/>
-		<item value="C:\Users\Flemming\Datamagi\EclipseWS\AlgorithmerMedDie\doc" key="destdir"/>
+		<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 17\doc" key="destdir"/>
 		<item value="false" key="openinbrowser"/>
 		<section name="projects">
+			<section name="Lecture 3 - Custom">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 3 - Custom\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 3 - Custom\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 7(4)">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 7(4)\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 7(4)\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="SU_Lecture5">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\SU_Lecture5\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\SU_Lecture5\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="ForFun">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\ForFun\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\ForFun\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 12">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 12\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 12\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Projekt1">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Projekt1\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Projekt1\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 13">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 13\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 13\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Afl1">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Afl1\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Afl1\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 14">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 14\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 14\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Test">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Test\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Test\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 15">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 15\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 15\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 16">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 16\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 16\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 17">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 17\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 17\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 2">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 2\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 2\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 3">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 3\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 3\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="QuickWriter">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\QuickWriter\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\QuickWriter\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Shapes">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 2\src\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 2\src\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Fibonacci">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Fibonacci\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Fibonacci\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 6">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 6\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 6\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="AlgorithmerMedDie">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\AlgorithmerMedDie\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\AlgorithmerMedDie\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="dnd5eCharacterGenerator">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\dnd5eCharacterGenerator\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\dnd5eCharacterGenerator\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
+			<section name="Lecture 8">
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 8\javadoc.xml" key="antpath"/>
+				<item value="C:\Users\Flemming\Datamagi\EclipseWS\Lecture 8\doc" key="destdir"/>
+				<item value="" key="href"/>
+			</section>
 		</section>
 	</section>
 	<section name="FatJarPackageWizard">
-		<item value="C:\Users\aadum\Datamagi\EclipseWS" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
-		<item value="MainApp (4) - QuickWriter" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="C:\Users\aadum\Datamagi\QuickWriter.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="C:\Users\Flemming\Datamagi\EclipseWS" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="MainApp (26) - QuickWriter" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\Flemming\Documents\QuickWriter.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
-			<item value="C:\Users\aadum\Datamagi\QuickWriter.jar"/>
+			<item value="C:\Users\Flemming\Documents\QuickWriter.jar"/>
 		</list>
 		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
 			<item value=".xml"/>
@@ -129,6 +239,13 @@
 	</section>
 	<section name="BuildPathsPropertyPage">
 		<item value="2" key="pageIndex"/>
+	</section>
+	<section name="JavadocWizardDialog">
+		<item value="616" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="567" key="DIALOG_HEIGHT"/>
+		<item value="660" key="DIALOG_X_ORIGIN"/>
+		<item value="150" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>

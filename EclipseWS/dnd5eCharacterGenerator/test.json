@@ -1,5 +1,67 @@
 {
   "name": "Test Character",
+  "level": 5,
+  "race": {
+    "features": [
+      {
+        "name": "Bite",
+        "desc": "Your fanged maw is a natural weapon which you are proficient with. It deals 1d6 points of piercing damage.",
+        "fullDesc": "",
+        "level": 0
+      },
+      {
+        "name": "Cunning Artisan",
+        "desc": "During a short rest you can create simple equipment from dead creatures.",
+        "fullDesc": "",
+        "level": 0
+      },
+      {
+        "name": "Hold Breath",
+        "desc": "You can hold your breath for 15 minutes.",
+        "fullDesc": "",
+        "level": 0
+      },
+      {
+        "name": "Hunters Lore",
+        "desc": "You are proficient in two of: Animal Handling, Nature, Perception, Stealth or Survival",
+        "fullDesc": "",
+        "level": 0
+      },
+      {
+        "name": "Natural Amor(13+Dex)",
+        "desc": "You have a natural armor of 13 + your Dexterity modifier.",
+        "fullDesc": "",
+        "level": 0
+      },
+      {
+        "name": "Hungry Jaws",
+        "desc": "Once per short rest you can as a bonus action make an attack with your bite, and gain temporary hitpoints equal to your Constitution modifier.",
+        "fullDesc": "",
+        "level": 0
+      },
+      {
+        "name": "Languages",
+        "desc": "You speak, read and write Common and Draconic",
+        "fullDesc": "",
+        "level": 0
+      }
+    ],
+    "ABSI": [
+      {
+        "x": {
+          "name": "Constitution"
+        },
+        "y": 2
+      },
+      {
+        "x": {
+          "name": "Wisdom"
+        },
+        "y": 1
+      }
+    ],
+    "name": "Lizardfolk"
+  },
   "charClass": {
     "name": "Vighter",
     "archetypes": [
@@ -9,31 +71,37 @@
           {
             "name": "Ranger of the Wild",
             "desc": "Choose three of the following options:\nForager\nStrider\nTracker\nTrapper\nTrainer\nTraveler",
+            "fullDesc": "",
             "level": 3
           },
           {
             "name": "Hunter\u0027s Quarry",
             "desc": "You can mark a target to deal extra damage on attacks",
+            "fullDesc": "",
             "level": 3
           },
           {
             "name": "Wilderness Guide",
             "desc": "You can travel in the wild better than anyone",
+            "fullDesc": "",
             "level": 7
           },
           {
             "name": "Hide in Plain Sight",
             "desc": "You can hide even when not completely hidden",
+            "fullDesc": "",
             "level": 10
           },
           {
             "name": "Stand Against the Tide",
             "desc": "You can grant disadvantage on some attacks",
+            "fullDesc": "",
             "level": 15
           },
           {
             "name": "Sicth Sense",
             "desc": "You can fight against hidden and even invisible creatures",
+            "fullDesc": "",
             "level": 18
           }
         ]
@@ -120,62 +188,75 @@
       {
         "name": "Fighting Style",
         "desc": "Choose a fighting Style from the following:\nArchery\nDefense\nDueling\nGreat Weapon Fighting\nProtection\nTwo-Weapon Fighting",
+        "fullDesc": "",
         "level": 1
       },
       {
         "name": "Second Wind",
         "desc": "Use a bonus action to heal for 1d10+Vighter Level hp",
+        "fullDesc": "",
         "level": 1
       },
       {
         "name": "Maneuvers",
         "desc": "Your learn two maneuvers, plus one additional at 3rd, 7th, 10th, 15th, 18th",
+        "fullDesc": "",
         "level": 2
       },
       {
         "name": "Action Surge",
         "desc": "Gain the use of an extra Action and possible Bonus Action",
+        "fullDesc": "",
         "level": 2
       },
       {
         "name": "Martial Archetype",
         "desc": "Choose your archetype",
+        "fullDesc": "",
         "level": 3
       },
       {
         "name": "ABSI",
         "desc": "Gain +1 to two stats, +2 to one stat, or a feat",
+        "fullDesc": "",
         "level": 4
       },
       {
         "name": "ABSI",
         "desc": "Gain +1 to two stats, +2 to one stat, or a feat",
+        "fullDesc": "",
         "level": 8
       },
       {
         "name": "ABSI",
         "desc": "Gain +1 to two stats, +2 to one stat, or a feat",
+        "fullDesc": "",
         "level": 12
       },
       {
         "name": "ABSI",
         "desc": "Gain +1 to two stats, +2 to one stat, or a feat",
+        "fullDesc": "",
         "level": 16
       },
       {
         "name": "ABSI",
         "desc": "Gain +1 to two stats, +2 to one stat, or a feat",
+        "fullDesc": "",
         "level": 19
       },
       {
         "name": "Extra Attack",
         "desc": "When you use your Attack action you may attack twice rather than once.",
+        "fullDesc": "",
         "improvement": {
           "name": "Extra Attack",
           "desc": "When you use your Attack action you may attack three times rather than once.",
+          "fullDesc": "",
           "improvement": {
             "name": "Extra Attack",
             "desc": "When you use your Attack action you may attack four times rather than once.",
+            "fullDesc": "",
             "level": 20
           },
           "level": 11
@@ -185,12 +266,15 @@
       {
         "name": "Indomitable",
         "desc": "You can reroll a saving throw once per long rest.",
+        "fullDesc": "",
         "improvement": {
           "name": "Indomitable",
           "desc": "You can reroll a saving throw twice per long rest.",
+          "fullDesc": "",
           "improvement": {
             "name": "Indomitable",
             "desc": "You can reroll a saving throw three times per long rest.",
+            "fullDesc": "",
             "level": 17
           },
           "level": 13
@@ -206,89 +290,40 @@
       {
         "name": "Ranger of the Wild",
         "desc": "Choose three of the following options:\nForager\nStrider\nTracker\nTrapper\nTrainer\nTraveler",
+        "fullDesc": "",
         "level": 3
       },
       {
         "name": "Hunter\u0027s Quarry",
         "desc": "You can mark a target to deal extra damage on attacks",
+        "fullDesc": "",
         "level": 3
       },
       {
         "name": "Wilderness Guide",
         "desc": "You can travel in the wild better than anyone",
+        "fullDesc": "",
         "level": 7
       },
       {
         "name": "Hide in Plain Sight",
         "desc": "You can hide even when not completely hidden",
+        "fullDesc": "",
         "level": 10
       },
       {
         "name": "Stand Against the Tide",
         "desc": "You can grant disadvantage on some attacks",
+        "fullDesc": "",
         "level": 15
       },
       {
         "name": "Sicth Sense",
         "desc": "You can fight against hidden and even invisible creatures",
+        "fullDesc": "",
         "level": 18
       }
     ]
-  },
-  "level": 12,
-  "race": {
-    "features": [
-      {
-        "name": "Bite",
-        "desc": "Your fanged maw is a natural weapon which you are proficient with. It deals 1d6 points of piercing damage.",
-        "level": 0
-      },
-      {
-        "name": "Cunning Artisan",
-        "desc": "During a short rest you can create simple equipment from dead creatures.",
-        "level": 0
-      },
-      {
-        "name": "Hold Breath",
-        "desc": "You can hold your breath for 15 minutes.",
-        "level": 0
-      },
-      {
-        "name": "Hunters Lore",
-        "desc": "You are proficient in two of: Animal Handling, Nature, Perception, Stealth or Survival",
-        "level": 0
-      },
-      {
-        "name": "Natural Amor(13+Dex)",
-        "desc": "You have a natural armor of 13 + your Dexterity modifier.",
-        "level": 0
-      },
-      {
-        "name": "Hungry Jaws",
-        "desc": "Once per short rest you can as a bonus action make an attack with your bite, and gain temporary hitpoints equal to your Constitution modifier.",
-        "level": 0
-      },
-      {
-        "name": "Languages",
-        "desc": "You speak, read and write Common and Draconic",
-        "level": 0
-      }
-    ],
-    "ABSI": [
-      {
-        "x": {
-          "name": "Constitution"
-        },
-        "y": 2
-      },
-      {
-        "x": {
-          "name": "Wisdom"
-        },
-        "y": 1
-      }
-    ],
-    "name": "Lizardfolk"
   },
   "skills": [
     {

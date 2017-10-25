@@ -14,6 +14,11 @@ public class Feature {
 		setFullDesc("");
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	public int getLevel() {
 		return level;
 	}
@@ -43,7 +48,13 @@ public class Feature {
 	}
 
 	public String getFullDesc() {
-		return fullDesc;
+		if (!fullDesc.equals("")) {
+			return fullDesc;
+		} else if (level > 0) {
+			return String.format("%s%nLevel: %s%n%n%s", name, level, desc);
+		} else {
+			return String.format("%s%nRacial%n%n%s", name, desc);
+		}
 	}
 
 	public void setFullDesc(String fullDesc) {

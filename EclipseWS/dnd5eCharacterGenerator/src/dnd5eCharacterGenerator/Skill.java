@@ -11,6 +11,11 @@ public class Skill {
 		this.ability = ability;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	public String getName() {
 		return name;
 	}

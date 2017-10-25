@@ -11,6 +11,14 @@ public class Character {
 	private Archetype archetype;
 	private ArrayList<Skill> skills;
 
+	public ArrayList<Feature> getFeatures() {
+		return featureList();
+	}
+
+	public ArrayList<Skill> getSkills() {
+		return skills;
+	}
+
 	private ArrayList<Feature> featureList() {
 		ArrayList<Feature> result = new ArrayList<>();
 
