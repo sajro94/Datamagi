@@ -1,5 +1,14 @@
 package quickWriter;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -32,8 +41,13 @@ public class MainApp extends Application {
 	private Button btnSubmit;
 	private TextField txfColor;
 	private Label lblWords;
+	private long time = System.currentTimeMillis();
+	private String fileName = "store.tmp";
+	private Path file = Paths.get(fileName);
+	private List<String> lines;
 
 	private void initContent(GridPane pane) {
+		lines = new ArrayList<>();
 		double width = 900.0;
 		pane.setGridLinesVisible(false);
 		pane.setPadding(new Insets(20));
@@ -43,6 +57,28 @@ public class MainApp extends Application {
 		txaInput.setWrapText(true);
 		txaInput.setPrefWidth(width);
 		txaInput.setPrefHeight(900);
+		String text = "";
+		boolean first = true;
+		try {
+			for (String s : Files.readAllLines(file)) {
+				if (first) {
+					text += s;
+					first = false;
+				} else {
+					text += String.format("%n%s", s);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			byte[] temp = { 0 };
+			try {
+				Files.write(file, temp);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		txaInput.setText(text);
 		pane.add(txaInput, 0, 1);
 		txaOutput = new TextArea();
 		txaOutput.setPrefWidth(width);
@@ -54,6 +90,19 @@ public class MainApp extends Application {
 		lblWords = new Label("-");
 		pane.add(lblWords, 1, 2);
 		btnSubmit.setOnAction(event -> submitAction());
+		txaInput.textProperty().addListener(event -> textListener());
+	}
+
+	private void textListener() {
+		if (System.currentTimeMillis() - time > 500) {
+			System.out.println("Attempting to store text!");
+			lines = Arrays.asList(txaInput.getText().trim().split(System.getProperty("line.separator")));
+			try {
+				Files.write(file, lines, Charset.forName("UTF-8"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void submitAction() {

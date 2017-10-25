@@ -95,6 +95,19 @@
 		<section name="projects">
 		</section>
 	</section>
+	<section name="FatJarPackageWizard">
+		<item value="C:\Users\aadum\Datamagi\EclipseWS" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="MainApp (4) - QuickWriter" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
+		<item value="C:\Users\aadum\Datamagi\QuickWriter.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
+		<item value="1" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
+		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="C:\Users\aadum\Datamagi\QuickWriter.jar"/>
+		</list>
+		<list key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION_HISTORY">
+			<item value=".xml"/>
+		</list>
+	</section>
 	<section name="JavaBuildConfigurationBlock">
 		<item value="true" key="expanded2"/>
 		<item value="true" key="expanded1"/>
