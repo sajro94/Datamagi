@@ -30,25 +30,31 @@ public class MainApp extends Application {
 	}
 
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage primeStage) {
+		stage = primeStage;
 		stage.setTitle("Combine Names");
 		GridPane pane = new GridPane();
 		initContent(pane);
 
 		Scene scene = new Scene(pane);
+		scene.getStylesheets().add("stylesheet.css");
 		try {
 			System.out.println(new File(".").getCanonicalPath());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		stage.setScene(scene);
 		stage.show();
 	}
 
+	private CharacterSheet charWindow;
+
 	private Controller controller = new Controller();
 	private Character character = new Character("Test Character");
 
+	private Stage stage;
 	private TextArea txaInfo;
 	private TextField txfChoice;
 	private Button btnChsArchetype;
@@ -107,6 +113,9 @@ public class MainApp extends Application {
 		// Button to save to file
 		btnSave = new Button("Save");
 		pane.add(btnSave, 1, 4);
+		Button btnCharSheet = new Button("Charactersheet");
+		pane.add(btnCharSheet, 1, 5);
+		btnCharSheet.setOnAction(event -> this.controller.showCharacterSheetAction());
 		btnChsSkills.setOnAction(event -> this.controller.chooseSkillsAction());
 		btnChsClass.setOnAction(event -> this.controller.chooseClassAction());
 		btnChsArchetype.setOnAction(event -> this.controller.chooseArchetypeAction());
@@ -264,6 +273,11 @@ public class MainApp extends Application {
 
 			d.addRace(r1);
 
+		}
+
+		private void showCharacterSheetAction() {
+			charWindow = new CharacterSheet("Charactersheet", stage, character);
+			charWindow.showAndWait();
 		}
 
 		private void chooseClassAction() {
