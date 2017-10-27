@@ -1,5 +1,13 @@
 package bhe;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -8,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -27,12 +36,14 @@ public class MainApp extends Application {
 		stage.show();
 	}
 
-	ListView<String> lstTables;
+	ArrayList<Table> tables;
+	ListView<Table> lstTables;
 	Button btnSearch;
 	TextField txfSearch;
-	TextArea txaResult;
+	WebView txaResult;
 
 	private void initContent(GridPane pane) {
+		tables = new ArrayList<>();
 		// show or hide grid lines
 		pane.setGridLinesVisible(false);
 
@@ -49,16 +60,51 @@ public class MainApp extends Application {
 		pane.add(btnSearch, 2, 0);
 		lstTables = new ListView<>();
 		pane.add(lstTables, 0, 1);
-		txaResult = new TextArea();
-		txaResult.setEditable(false);
+		txaResult = new WebView();
 		pane.add(txaResult, 1, 1);
-		createStartList();
+		try {
+			createStartList();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		lstTables.getSelectionModel().selectedItemProperty().addListener(event -> {
+			try {
+				tableSelectAction();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 
 	}
 
-	private void createStartList() {
-		// TODO Auto-generated method stub
+	private void tableSelectAction() throws IOException {
+		Table temp = lstTables.getSelectionModel().getSelectedItem();
 
+		Document doc = Jsoup.connect(temp.getLink()).get();
+		Element content = doc.select(".usertext-body.may-blank-within.md-container").get(1);
+		txaResult.getEngine().loadContent(content.toString());
+	}
+
+	private void createStartList() throws IOException {
+		Document doc;
+		doc = Jsoup.connect("https://www.reddit.com/r/BehindTheTables/wiki/index").get();
+		Elements inner = doc.select(".md.wiki");
+		Elements uls = inner.get(0).select("ul");
+		uls.remove(0);
+		uls.remove(0);
+		uls.remove(uls.size() - 1);
+		for (Element u : uls) {
+			Elements lis = u.select("li");
+			for (Element l : lis) {
+				Elements a = l.select("a");
+				if (a.size() != 0) {
+					tables.add(new Table(a.get(0).attr("href"), a.get(0).html()));
+				}
+			}
+		}
+		lstTables.getItems().setAll(tables);
 	}
 
 }
