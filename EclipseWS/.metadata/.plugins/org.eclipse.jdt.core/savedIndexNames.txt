@@ -5,7 +5,6 @@ INDEX VERSION 1.130+C:\Users\Flemming\Datamagi\EclipseWS\.metadata\.plugins\org.
 3380403084.index
 802207380.index
 3433396620.index
-359748429.index
 698954386.index
 1387455045.index
 3149166185.index
