@@ -13,10 +13,17 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -32,7 +39,7 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage primeStage) {
 		stage = primeStage;
-		stage.setTitle("Combine Names");
+		stage.setTitle("Character Creator");
 		GridPane pane = new GridPane();
 		initContent(pane);
 
@@ -55,7 +62,7 @@ public class MainApp extends Application {
 	private Character character = new Character("Test Character");
 
 	private Stage stage;
-	private TextArea txaInfo;
+	private ListView<Choice> lstChoose;
 	private TextField txfChoice;
 	private Button btnChsArchetype;
 	private Button btnChsClass;
@@ -77,11 +84,11 @@ public class MainApp extends Application {
 		// set vertical gap between components
 		pane.setVgap(10);
 		// TextArea to show information
-		txaInfo = new TextArea();
-		txaInfo.setEditable(false);
-		txaInfo.setMinHeight(160);
-		txaInfo.setMinWidth(320);
-		pane.add(txaInfo, 0, 0, 4, 1);
+		lstChoose = new ListView<>();
+		lstChoose.setEditable(false);
+		lstChoose.setMinHeight(160);
+		lstChoose.setMinWidth(320);
+		pane.add(lstChoose, 0, 0, 4, 1);
 		// Label to indicate choice field
 		lblChoice = new Label("Choice");
 		pane.add(lblChoice, 0, 1);
@@ -101,8 +108,6 @@ public class MainApp extends Application {
 		btnChsRace = new Button("Show Races");
 		pane.add(btnChsRace, 4, 2);
 		// Button to show features
-		btnShowCharacter = new Button("Show Character");
-		pane.add(btnShowCharacter, 2, 3);
 		// Textfield to set and show level
 		txfLevel = new TextField("1");
 		txfLevel.setStyle("");
@@ -116,11 +121,10 @@ public class MainApp extends Application {
 		Button btnCharSheet = new Button("Charactersheet");
 		pane.add(btnCharSheet, 1, 5);
 		btnCharSheet.setOnAction(event -> this.controller.showCharacterSheetAction());
-		btnChsSkills.setOnAction(event -> this.controller.chooseSkillsAction());
-		btnChsClass.setOnAction(event -> this.controller.chooseClassAction());
-		btnChsArchetype.setOnAction(event -> this.controller.chooseArchetypeAction());
-		btnChsRace.setOnAction(event -> this.controller.chooseRaceAction());
-		btnShowCharacter.setOnAction(event -> this.controller.showCharacterAction());
+		btnChsSkills.setOnAction(event -> this.controller.showSkillsAction());
+		btnChsClass.setOnAction(event -> this.controller.showClassesAction());
+		btnChsArchetype.setOnAction(event -> this.controller.showArchetypesAction());
+		btnChsRace.setOnAction(event -> this.controller.showRacesAction());
 		btnSetLvl.setOnAction(event -> this.controller.setLevelAction());
 		btnSave.setOnAction(event -> this.controller.saveFile());
 
@@ -280,113 +284,136 @@ public class MainApp extends Application {
 			charWindow.showAndWait();
 		}
 
-		private void chooseClassAction() {
-			if (showClasses) {
-				int choice = Integer.parseInt(txfChoice.getText());
-				if (choice <= d.getClasses().size()) {
-					txaInfo.setText("You chose a class");
-					character.setCharClass(d.getClasses().get(choice - 1));
-				}
-				btnChsClass.setText("Show Classes");
-				showClasses = false;
-			} else {
-				showClasses = true;
-				String content = "";
-				int i = 1;
-				for (Class c : this.d.getClasses()) {
-					content += i + ". " + c.getName() + "\n";
-					i++;
-				}
-				btnChsClass.setText("Choose Class");
-				txaInfo.setText(content);
-			}
+		private void showClassesAction() {
+			lstChoose.getItems().setAll(d.getClasses());
+			resetButtons();
+			btnChsClass.setText("Choose Class");
+			btnChsClass.setOnAction(event -> chooseClassAction());
+		}
 
+		private void chooseClassAction() {
+			if ((Class) lstChoose.getSelectionModel().getSelectedItem() != null) {
+				character.setCharClass((Class) lstChoose.getSelectionModel().getSelectedItem());
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Class Selected");
+				alert.setContentText(String.format("You selected the %s class.", character.getCharClass().getName()));
+				alert.setTitle("Class Selected");
+				alert.showAndWait();
+			} else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Select a Class from the List.");
+				alert.setTitle("Selection Missing");
+				alert.showAndWait();
+			}
+		}
+
+		private void showArchetypesAction() {
+			if (character.getCharClass() != null) {
+				resetButtons();
+				lstChoose.getItems().setAll(character.getCharClass().getArchetypes());
+				btnChsArchetype.setText("Choose Archetype");
+				btnChsArchetype.setOnAction(event -> chooseArchetypeAction());
+
+			} else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Missing Class");
+				alert.setHeaderText("You need to pick a class first.");
+				alert.showAndWait();
+			}
 		}
 
 		private void chooseArchetypeAction() {
-			if (showArchtypes) {
-				int choice = Integer.parseInt(txfChoice.getText());
-				ArrayList<Archetype> testList = character.getCharClass().getArchetypes();
-				if (choice <= testList.size()) {
-					txaInfo.setText("You chose an archetype");
-					character.setArchetype(testList.get(choice - 1));
-				}
-				showArchtypes = false;
-				btnChsArchetype.setText("Show Archetypes");
+			if ((Archetype) lstChoose.getSelectionModel().getSelectedItem() != null) {
+				character.setArchetype(((Archetype) lstChoose.getSelectionModel().getSelectedItem()));
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Archetype Selected");
+				alert.setContentText(
+						String.format("You selected the %s archetype.", character.getArchetype().getName()));
+				alert.setTitle("Archetype Selected");
+				alert.showAndWait();
 			} else {
-				String content = "";
-				int i = 1;
-				for (Archetype a : character.getCharClass().getArchetypes()) {
-					content += i + ". " + a.getName() + "\n";
-					i++;
-				}
-				txaInfo.setText(content);
-				btnChsArchetype.setText("Choose Archetype");
-				showArchtypes = true;
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Select an archetype from the List.");
+				alert.setTitle("Selection Missing");
+				alert.showAndWait();
+			}
+		}
+
+		private ArrayList<Integer> indexes = new ArrayList<>();
+
+		private void showSkillsAction() {
+			if (character.getCharClass() != null) {
+				resetButtons();
+				lstChoose.getItems().setAll(character.getCharClass().getSkillList());
+				lstChoose.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+				btnChsSkills.setText(String.format("Choose %s Skills", character.getCharClass().getSkills()));
+				btnChsSkills.setOnAction(event -> chooseSkillsAction());
+			} else {
+
 			}
 		}
 
 		private void chooseSkillsAction() {
-			if (showSkills) {
-				ArrayList<Skill> testList = character.getCharClass().getSkillList();
-				String choice = txfChoice.getText().trim();
-				String[] choices = choice.split(",");
-				for (String s : choices) {
-					int test = Integer.parseInt(s);
-					if (test <= testList.size()) {
-						character.addSkill(testList.get(test - 1));
-					}
+			ObservableList<Choice> skills = lstChoose.getSelectionModel().getSelectedItems();
+			System.out.println(skills);
+			if (skills.size() == character.getCharClass().getSkills()) {
+				character.resetSkills();
+				for (Choice s : skills) {
+					character.addSkill((Skill) s);
 				}
-				showSkills = false;
-				btnChsSkills.setText("Show Skills");
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Skills set");
+				alert.showAndWait();
+			} else if (skills.size() > character.getCharClass().getSkills()) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Too many skills selected");
+				alert.showAndWait();
 			} else {
-				String content = "";
-				int i = 1;
-				for (Skill s : character.getCharClass().getSkillList()) {
-					content += i + ". " + s.getName() + "\n";
-					i++;
-				}
-				content += String.format("As your input give a comma seperated list of %s numbers.%n",
-						character.getCharClass().getSkills());
-				txaInfo.setText(content);
-				showSkills = true;
-				btnChsSkills.setText("Choose skills");
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Too few skills selected");
+				alert.showAndWait();
 			}
 		}
 
-		public void chooseRaceAction() {
-			if (showRaces) {
-				int choice = Integer.parseInt(txfChoice.getText());
-				ArrayList<Race> testList = d.getRaces();
-				if (choice <= testList.size()) {
-					txaInfo.setText("You chose a race");
-					character.setRace(testList.get(choice - 1));
-				}
-				btnChsRace.setText("Show Races");
-				showRaces = false;
-			} else {
-				String content = "";
-				int i = 1;
-				for (Race r : d.getRaces()) {
-					content += i + ". " + r.getName() + "\n";
-					i++;
-				}
-				txaInfo.setText(content);
-				btnChsRace.setText("Choose Race");
-				showRaces = true;
-			}
+		public void showRacesAction() {
+			resetButtons();
+			lstChoose.getItems().setAll(d.getRaces());
+			btnChsRace.setText("Choose Race");
+			btnChsRace.setOnAction(event -> chooseRaceAction());
 		}
 
-		private void showCharacterAction() {
-			String content = String.format("Name: %s%nClass: %s%nLevel: %s%n%nFeatures:%n%s%n", character.getName(),
-					character.getCharClass().getName(), character.getLevel(), character.featuresToString());
-			content += String.format("Proficiencies: %n%s%n", character.skillsToString());
-			txaInfo.setText(content);
+		private void chooseRaceAction() {
+			if ((Race) lstChoose.getSelectionModel().getSelectedItem() != null) {
+				character.setRace((Race) lstChoose.getSelectionModel().getSelectedItem());
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Race Selected");
+				alert.setContentText(String.format("You selected the %s Race.", character.getRace().getName()));
+				alert.setTitle("Race Selected");
+				alert.showAndWait();
+			} else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Select a Race from the List.");
+				alert.setTitle("Selection Missing");
+				alert.showAndWait();
+			}
 		}
 
 		private void setLevelAction() {
 			int lvl = Integer.parseInt(txfLevel.getText());
 			character.setLevel(lvl);
+		}
+
+		public void resetButtons() {
+			btnChsArchetype.setText("Show Archetypes");
+			btnChsArchetype.setOnAction(event -> showArchetypesAction());
+			btnChsClass.setText("Show Classes");
+			btnChsClass.setOnAction(event -> showClassesAction());
+			btnChsRace.setText("Show Races");
+			btnChsRace.setOnAction(event -> showRacesAction());
+			btnChsSkills.setText("Show Skills");
+			btnChsSkills.setOnAction(EventHandler -> showSkillsAction());
+			lstChoose.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
 		}
 	}
 

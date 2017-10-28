@@ -109,4 +109,8 @@ public class Character {
 		return result;
 	}
 
+	public void resetSkills() {
+		skills.clear();
+	}
+
 }

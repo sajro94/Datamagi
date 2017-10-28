@@ -1,22 +1,17 @@
 package dnd5eCharacterGenerator;
 
-public class Skill {
-	private String name;
+public class Skill extends Choice {
 	private String desc;
 	private Ability ability;
 
 	public Skill(String name, String desc, Ability ability) {
-		this.name = name;
+		super(name);
 		this.desc = desc;
 		this.ability = ability;
 	}
 
 	@Override
 	public String toString() {
-		return name;
-	}
-
-	public String getName() {
 		return name;
 	}
 

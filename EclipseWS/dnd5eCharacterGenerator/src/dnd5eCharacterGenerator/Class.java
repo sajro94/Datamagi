@@ -2,8 +2,7 @@ package dnd5eCharacterGenerator;
 
 import java.util.ArrayList;
 
-public class Class {
-	private String name;
+public class Class extends Choice {
 	private ArrayList<Archetype> archetypes;
 	private Die hitdie;
 	private ArrayList<Skill> skillList;
@@ -16,7 +15,7 @@ public class Class {
 	private int skills;
 
 	public Class(String name, Die hitdie, Ability savingThrow1, Ability savingThrow2, int skills) {
-		this.name = name;
+		super(name);
 		this.archetypes = new ArrayList<>();
 		this.hitdie = hitdie;
 		this.skillList = new ArrayList<>();
@@ -29,10 +28,6 @@ public class Class {
 		this.equipment = new ArrayList<>();
 		this.features = new ArrayList<>();
 		this.skills = skills;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public ArrayList<Archetype> getArchetypes() {

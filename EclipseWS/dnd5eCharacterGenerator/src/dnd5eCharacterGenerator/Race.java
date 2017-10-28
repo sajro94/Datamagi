@@ -5,16 +5,16 @@ import java.util.ArrayList;
 
 import javafx.scene.Parent;
 
-public class Race {
+public class Race extends Choice {
 	ArrayList<Feature> features;
 	ArrayList<Pair<Ability, Integer>> ABSI;
 	String name;
 	ArrayList<Runnable> statChangers;
 
 	public Race(String name) {
+		super(name);
 		this.features = new ArrayList<>();
 		this.ABSI = new ArrayList<>();
-		this.name = name;
 		statChangers = new ArrayList<>();
 	}
 
@@ -25,10 +25,6 @@ public class Race {
 
 	public ArrayList<Pair<Ability, Integer>> getAbsi() {
 		return this.ABSI;
-	}
-
-	public String getName() {
-		return this.name;
 	}
 
 	public void addFeature(Feature f) {
