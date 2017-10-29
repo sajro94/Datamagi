@@ -30,7 +30,6 @@ public class MainApp extends Application {
 		stage.show();
 	}
 
-	private int seatColMax = 0;
 	private TextField txfPrice;
 
 	private void initContent(GridPane pane) {
@@ -60,7 +59,6 @@ public class MainApp extends Application {
 
 	private void generateSeats(GridPane pane) {
 		for (int i = 0; i < t.getTheater().length; i++) {
-			seatColMax++;
 			for (int j = 0; j < t.getTheater()[i].length; j++) {
 				Button temp = new Button(String.valueOf(t.getTheater()[i][j]));
 				pane.add(temp, j, i + 1);

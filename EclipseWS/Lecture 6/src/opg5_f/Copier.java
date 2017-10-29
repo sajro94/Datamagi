@@ -2,6 +2,7 @@ package opg5_f;
 
 public class Copier {
 	private int paper;
+	@SuppressWarnings("unused")
 	private boolean paperStuck;
 
 	public int getPater() {

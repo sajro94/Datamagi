@@ -29,6 +29,6 @@ public class Database {
 	}
 
 	private void s1() {
-		RacialFeature rf1 = new RacialFeature();
+		// sRacialFeature rf1 = new RacialFeature();
 	}
 }

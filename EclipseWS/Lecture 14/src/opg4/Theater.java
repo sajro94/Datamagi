@@ -11,13 +11,12 @@ public class Theater {
 	private Scanner scan = new Scanner(System.in);
 
 	public void buyTicket() {
-		boolean error;
 		System.out.printf("Input %S for at købe til bestemt pris.%nInput %S for at købe en bestemt plads.%n", "a", "b");
 		String input = scan.nextLine();
 		if (input.equalsIgnoreCase("B")) {
-			error = ticketByPlace();
+			ticketByPlace();
 		} else {
-			error = ticketByPrice();
+			ticketByPrice();
 		}
 	}
 
@@ -57,7 +56,6 @@ public class Theater {
 		} else {
 			return ticketByPrice();
 		}
-		boolean done = false;
 		for (int i = theater.length - 1; i >= 0; i--) {
 			int halfWay = Math.round(theater[i].length / 2);
 			int neg = -1;

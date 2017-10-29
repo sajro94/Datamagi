@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in).useLocale(Locale.US);
+		Scanner scanner = new Scanner(System.in);
+		Scanner in = scanner.useLocale(Locale.US);
 		boolean integer = false;
 		int num = 0;
 		while (!integer) {
@@ -26,7 +27,7 @@ public class Main {
 		} else {
 			System.out.println("Number is zero");
 		}
-		in.close();
+		scanner.close();
 	}
 
 }

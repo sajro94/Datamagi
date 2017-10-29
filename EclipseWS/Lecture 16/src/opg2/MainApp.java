@@ -54,7 +54,7 @@ public class MainApp extends Application {
 		pane.add(chkSenior, 0, 2);
 		btnAdd = new Button("Add Person");
 		pane.add(btnAdd, 2, 2);
-		Label lblPpl = new Label("People:");
+		new Label("People:");
 		lstPeople = new ListView<>();
 		pane.add(lstPeople, 1, 2);
 		btnAdd.setOnAction(event -> addPersonAction());
