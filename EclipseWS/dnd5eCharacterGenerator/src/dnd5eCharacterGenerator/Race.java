@@ -1,9 +1,6 @@
 package dnd5eCharacterGenerator;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-
-import javafx.scene.Parent;
 
 public class Race extends Choice {
 	ArrayList<Feature> features;

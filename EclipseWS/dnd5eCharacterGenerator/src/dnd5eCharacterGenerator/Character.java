@@ -2,6 +2,9 @@ package dnd5eCharacterGenerator;
 
 import java.util.ArrayList;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 public class Character {
 
 	private String name;
@@ -10,9 +13,11 @@ public class Character {
 	private Class charClass;
 	private Archetype archetype;
 	private ArrayList<Skill> skills;
+	private ArrayList<Feature> features;
+	private ArrayList<Feature> doneFeatures;
 
 	public ArrayList<Feature> getFeatures() {
-		return featureList();
+		return features;
 	}
 
 	public ArrayList<Skill> getSkills() {
@@ -23,9 +28,9 @@ public class Character {
 		ArrayList<Feature> result = new ArrayList<>();
 
 		ArrayList<Feature> collective = new ArrayList<>();
-		collective.addAll(race.getFeatures());
-		collective.addAll(charClass.getFeatures());
-		collective.addAll(archetype.getFeatures());
+		collective.addAll(race != null ? race.getFeatures() : new ArrayList<Feature>());
+		collective.addAll(charClass != null ? charClass.getFeatures() : new ArrayList<Feature>());
+		collective.addAll(archetype != null ? archetype.getFeatures() : new ArrayList<Feature>());
 		collective.sort((o1, o2) -> o1.getLevel() - o2.getLevel());
 		for (Feature f : collective) {
 			if (f.getLevel() <= level) {
@@ -34,13 +39,44 @@ public class Character {
 					while (test.getImprovement() != null && test.getImprovement().getLevel() <= level) {
 						test = test.getImprovement();
 					}
+					if (test.getClass().equals(OptionFeature.class)) {
+						OptionFeature ofTest = (OptionFeature) test;
+						if (!doneFeatures.contains(ofTest)) {
+							doneFeatures.add(ofTest);
+							executeFeature(ofTest);
+						}
+					}
 					result.add(test);
 				} else {
+					if (f.getClass().equals(OptionFeature.class)) {
+						OptionFeature ofTest = (OptionFeature) f;
+						if (!doneFeatures.contains(ofTest)) {
+							doneFeatures.add(ofTest);
+							executeFeature(ofTest);
+						}
+					}
 					result.add(f);
 				}
 			}
 		}
 		return result;
+	}
+
+	private void executeFeature(OptionFeature test) {
+		ArrayList<Choice> choices = test.getChoices();
+		if (choices.get(0).getClass().equals(Archetype.class)) {
+			System.out.println("Archetype Feature!");
+			ChoiceWindow chw = new ChoiceWindow(MainApp.stage, "Archetype Feature");
+			chw.setChoices(choices);
+			chw.showAndWait();
+			setArchetype(chw.getArch());
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Archetype Selected");
+			alert.setContentText(String.format("You selected the %s archetype.", archetype.getName()));
+			alert.setTitle("Archetype Selected");
+			alert.showAndWait();
+		}
+		features = featureList();
 	}
 
 	public String featuresToString() {
@@ -58,7 +94,9 @@ public class Character {
 	public Character(String name) {
 		this.name = name;
 		skills = new ArrayList<>();
-		setLevel(1);
+		features = new ArrayList<>();
+		this.level = 0;
+		doneFeatures = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -83,6 +121,7 @@ public class Character {
 
 	public void setLevel(int level) {
 		this.level = level;
+		features = featureList();
 	}
 
 	public Archetype getArchetype() {
