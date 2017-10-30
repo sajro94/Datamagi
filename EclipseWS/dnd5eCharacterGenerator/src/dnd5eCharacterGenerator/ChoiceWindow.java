@@ -2,10 +2,12 @@ package dnd5eCharacterGenerator;
 
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -32,6 +34,9 @@ public class ChoiceWindow extends Stage {
 
 	private ListView<Choice> lstChoices;
 	private Button btnChs;
+	private boolean multi = false;
+	private int limit = 1;
+	private ArrayList<Skill> skills;
 
 	private void initContent(GridPane pane) {
 		new ArrayList<>();
@@ -48,11 +53,24 @@ public class ChoiceWindow extends Stage {
 	}
 
 	private void chooseAction() {
-		if (lstChoices.getSelectionModel().getSelectedItem() != null) {
+		if (!multi && lstChoices.getSelectionModel().getSelectedItem() != null) {
 			Object choiceClass = lstChoices.getSelectionModel().getSelectedItem().getClass();
 			if (choiceClass.equals(Archetype.class)) {
 				arch = (Archetype) lstChoices.getSelectionModel().getSelectedItem();
 				hide();
+			}
+		} else if (multi && lstChoices.getSelectionModel().getSelectedItems().size() != 0) {
+			Object choiceClass = lstChoices.getSelectionModel().getSelectedItems().get(0).getClass();
+			if (choiceClass.equals(Skill.class)) {
+				ObservableList<Choice> obsSkills = lstChoices.getSelectionModel().getSelectedItems();
+				ArrayList<Skill> skills = new ArrayList<>();
+				for (Choice c : obsSkills) {
+					skills.add((Skill) c);
+				}
+				if (skills.size() == limit) {
+					this.skills = skills;
+					hide();
+				}
 			}
 		}
 	}
@@ -64,5 +82,16 @@ public class ChoiceWindow extends Stage {
 	public Archetype getArch() {
 		// TODO Auto-generated method stub
 		return arch;
+	}
+
+	public void setMulti(boolean b) {
+		multi = b;
+		if (b) {
+			lstChoices.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		}
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 }

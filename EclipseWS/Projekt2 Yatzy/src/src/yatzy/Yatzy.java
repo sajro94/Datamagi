@@ -1,6 +1,5 @@
 package src.yatzy;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -121,12 +120,13 @@ public class Yatzy {
 	 *            number of kind
 	 */
 	public int valueManyOfAKind(int n) {
-		if (valueManyOfAKind(5) != 0) {
-			return 50;
-		} else {
-			return 0;
+		int[] freq = freqFaceValue();
+		for (int i = 6; i >= 1; i--) {
+			if (freq[i] >= n) {
+				return n * i;
+			}
 		}
-
+		return 0;
 	}
 
 	/**

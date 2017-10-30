@@ -82,6 +82,17 @@ public class Character {
 		xClose = true;
 	}
 
+	private void chooseClassSkills(ArrayList<Skill> input) {
+		ChoiceWindow skillChs = new ChoiceWindow(MainApp.stage, "");
+		ArrayList<Choice> choices = new ArrayList<>();
+		for (Skill s : input) {
+			choices.add(s);
+		}
+		skillChs.setChoices(choices);
+		skillChs.setMulti(true);
+		skillChs.showAndWait();
+	}
+
 	public String featuresToString() {
 		String content = "";
 		for (Feature f : charFeatures) {
@@ -98,7 +109,7 @@ public class Character {
 		this.name = name;
 		skillProfs = new ArrayList<>();
 		charFeatures = new ArrayList<>();
-		this.level = 0;
+		this.level = 1;
 	}
 
 	public String getName() {
@@ -114,7 +125,9 @@ public class Character {
 		className = charClass.getName();
 		Collections.sort(classFeatures, (o1, o2) -> o1.getLevel() - o2.getLevel());
 		System.out.println(classFeatures);
+		chooseClassSkills(charClass.getSkillList());
 		featureList(classFeatures);
+
 	}
 
 	public int getLevel() {
