@@ -16,7 +16,7 @@ public class ChoiceWindow extends Stage {
 
 	public ChoiceWindow(Stage owner, String title) {
 		initOwner(owner);
-		initStyle(StageStyle.UTILITY);
+		initStyle(StageStyle.DECORATED);
 		initModality(Modality.APPLICATION_MODAL);
 		setMinHeight(100);
 		setMinWidth(200);
@@ -48,9 +48,12 @@ public class ChoiceWindow extends Stage {
 	}
 
 	private void chooseAction() {
-		System.out.println(lstChoices.getSelectionModel().getSelectedItem().getClass());
-		if (lstChoices.getSelectionModel().getSelectedItem().getClass().equals(Archetype.class)) {
-			arch = (Archetype) lstChoices.getSelectionModel().getSelectedItem();
+		if (lstChoices.getSelectionModel().getSelectedItem() != null) {
+			Object choiceClass = lstChoices.getSelectionModel().getSelectedItem().getClass();
+			if (choiceClass.equals(Archetype.class)) {
+				arch = (Archetype) lstChoices.getSelectionModel().getSelectedItem();
+				hide();
+			}
 		}
 	}
 

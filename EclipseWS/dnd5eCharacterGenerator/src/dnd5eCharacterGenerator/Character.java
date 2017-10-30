@@ -1,6 +1,8 @@
 package dnd5eCharacterGenerator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -9,94 +11,94 @@ public class Character {
 
 	private String name;
 	private int level;
-	private Race race;
-	private Class charClass;
-	private Archetype archetype;
-	private ArrayList<Skill> skills;
-	private ArrayList<Feature> features;
-	private ArrayList<Feature> doneFeatures;
+	private String className;
+	private String archName;
+	private ArrayList<Skill> skillProfs;
+	private ArrayList<Feature> charFeatures;
+	private String raceName;
+
+	private ArrayList<Feature> classFeatures;
+	private ArrayList<Feature> raceFeatures;
+	private ArrayList<Feature> archeFeatures;
+
+	private Ability[] abilities;
 
 	public ArrayList<Feature> getFeatures() {
-		return features;
+		return charFeatures;
 	}
 
 	public ArrayList<Skill> getSkills() {
-		return skills;
+		return skillProfs;
 	}
 
-	private ArrayList<Feature> featureList() {
-		ArrayList<Feature> result = new ArrayList<>();
-
-		ArrayList<Feature> collective = new ArrayList<>();
-		collective.addAll(race != null ? race.getFeatures() : new ArrayList<Feature>());
-		collective.addAll(charClass != null ? charClass.getFeatures() : new ArrayList<Feature>());
-		collective.addAll(archetype != null ? archetype.getFeatures() : new ArrayList<Feature>());
-		collective.sort((o1, o2) -> o1.getLevel() - o2.getLevel());
-		for (Feature f : collective) {
-			if (f.getLevel() <= level) {
-				if (f.getImprovement() != null && f.getImprovement().getLevel() <= level) {
-					Feature test = f.getImprovement();
-					while (test.getImprovement() != null && test.getImprovement().getLevel() <= level) {
-						test = test.getImprovement();
-					}
-					if (test.getClass().equals(OptionFeature.class)) {
-						OptionFeature ofTest = (OptionFeature) test;
-						if (!doneFeatures.contains(ofTest)) {
-							doneFeatures.add(ofTest);
-							executeFeature(ofTest);
-						}
-					}
-					result.add(test);
+	private void featureList(ArrayList<Feature> features) {
+		if (features != null) {
+			boolean done = false;
+			for (int i = 0; i < features.size() && !done; i++) {
+				if (features.get(i).getLevel() <= level) {
+					charFeatures.add(features.get(i));
+					features.remove(i);
 				} else {
-					if (f.getClass().equals(OptionFeature.class)) {
-						OptionFeature ofTest = (OptionFeature) f;
-						if (!doneFeatures.contains(ofTest)) {
-							doneFeatures.add(ofTest);
-							executeFeature(ofTest);
-						}
-					}
-					result.add(f);
+					done = true;
 				}
 			}
 		}
-		return result;
 	}
 
 	private void executeFeature(OptionFeature test) {
 		ArrayList<Choice> choices = test.getChoices();
 		if (choices.get(0).getClass().equals(Archetype.class)) {
-			System.out.println("Archetype Feature!");
-			ChoiceWindow chw = new ChoiceWindow(MainApp.stage, "Archetype Feature");
-			chw.setChoices(choices);
-			chw.showAndWait();
-			setArchetype(chw.getArch());
+			singleChoice(choices, "Archetype");
+		}
+	}
+
+	private boolean xClose;
+
+	private void singleChoice(ArrayList<Choice> choices, String choiceType) {
+		ChoiceWindow chw = new ChoiceWindow(MainApp.stage, choiceType);
+		chw.setChoices(choices);
+		xClose = false;
+		chw.setOnCloseRequest(event -> xClosed());
+		chw.showAndWait();
+		if (!xClose) {
+
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setHeaderText("Archetype Selected");
-			alert.setContentText(String.format("You selected the %s archetype.", archetype.getName()));
+			alert.setHeaderText(String.format("%s Selected", choiceType));
+			switch (choiceType) {
+			case "Archetype":
+				setArchetype(chw.getArch());
+				alert.setContentText(String.format("You selected the %s archetype.", archName));
+				break;
+			case "Feature":
+
+			}
+
 			alert.setTitle("Archetype Selected");
 			alert.showAndWait();
 		}
-		features = featureList();
+	}
+
+	private void xClosed() {
+		xClose = true;
 	}
 
 	public String featuresToString() {
 		String content = "";
-		for (Feature f : featureList()) {
+		for (Feature f : charFeatures) {
 			content += String.format("%s: %s%n", f.getName(), f.getDesc());
 		}
 		return content;
 	}
 
 	public void addSkill(Skill s) {
-		skills.add(s);
+		skillProfs.add(s);
 	}
 
 	public Character(String name) {
 		this.name = name;
-		skills = new ArrayList<>();
-		features = new ArrayList<>();
+		skillProfs = new ArrayList<>();
+		charFeatures = new ArrayList<>();
 		this.level = 0;
-		doneFeatures = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -107,49 +109,71 @@ public class Character {
 		this.name = name;
 	}
 
-	public Class getCharClass() {
-		return charClass;
-	}
-
 	public void setCharClass(Class charClass) {
-		this.charClass = charClass;
+		this.classFeatures = charClass.getFeatures();
+		className = charClass.getName();
+		Collections.sort(classFeatures, (o1, o2) -> o1.getLevel() - o2.getLevel());
+		System.out.println(classFeatures);
+		featureList(classFeatures);
 	}
 
 	public int getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
-		features = featureList();
+	public void levelUp() {
+		this.level++;
+		featureList(classFeatures);
+		featureList(raceFeatures);
+		featureList(archeFeatures);
 	}
 
-	public Archetype getArchetype() {
-		return archetype;
+	public String getArchName() {
+		return archName;
 	}
 
 	public void setArchetype(Archetype archetype) {
-		this.archetype = archetype;
-	}
-
-	public Race getRace() {
-		return race;
+		archeFeatures = archetype.getFeatures();
+		archName = archetype.getName();
+		featureList(archeFeatures);
 	}
 
 	public void setRace(Race race) {
-		this.race = race;
+		this.raceFeatures = race.getFeatures();
+		this.raceName = race.getName();
+		featureList(raceFeatures);
 	}
 
 	public String skillsToString() {
 		String result = "";
-		for (Skill s : skills) {
+		for (Skill s : skillProfs) {
 			result += String.format("%s, ", s.getName());
 		}
 		return result;
 	}
 
 	public void resetSkills() {
-		skills.clear();
+		skillProfs.clear();
+	}
+
+	public ArrayList<Feature> getArcheFeatures() {
+		return archeFeatures;
+	}
+
+	public ArrayList<Feature> getRaceFeatures() {
+		return raceFeatures;
+	}
+
+	public ArrayList<Feature> getClassFeatures() {
+		return classFeatures;
+	}
+
+	public String getRaceName() {
+		return raceName;
+	}
+
+	public String getClassName() {
+		return className;
 	}
 
 }
