@@ -1,15 +1,14 @@
 package dnd5eCharacterGenerator;
 
-public class Feature {
-	private String name;
+public class Feature extends Choice {
 	private String desc;
 	private String fullDesc;
 	private Feature improvement;
 	private int level;
 
 	public Feature(String name, String desc, int level) {
+		super(name);
 		this.desc = desc;
-		this.name = name;
 		this.level = level;
 		setFullDesc("");
 	}
@@ -23,6 +22,7 @@ public class Feature {
 		return level;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}

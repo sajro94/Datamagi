@@ -6,10 +6,8 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -43,7 +41,7 @@ public class MainApp extends Application {
 		pane.setVgap(10);
 		btnAdd = new Button("Add Person");
 		pane.add(btnAdd, 0, 0);
-		Label lblPpl = new Label("People:");
+		new Label("People:");
 		lstPeople = new ListView<>();
 		pane.add(lstPeople, 1, 0);
 		btnAdd.setOnAction(event -> addPersonAction());

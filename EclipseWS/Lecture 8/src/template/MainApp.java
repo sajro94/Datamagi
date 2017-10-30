@@ -64,101 +64,11 @@ public class MainApp extends Application {
 		arrowRHead(x + (ticks + 1) * off, y, gc);
 	}
 
-	private void texter(GraphicsContext gc, String text, int x, int y) {
-		int i = 0;
-		int offset = 0;
-		int off = 10;
-		while (i < text.length()) {
-			i++;
-			gc.fillText(text.substring(0, i), x, y + offset);
-			offset += off;
-		}
-	}
-
-	private void ellipses(int x, int y, GraphicsContext gc, int lines) {
-		int h = 30;
-		int l = 15;
-		int off = 10;
-		while (l <= off * lines) {
-			gc.strokeOval(x - l, y - h, l * 2, h * 2);
-			l += off;
-		}
-	}
-
-	private void cone(int sX, int sY, GraphicsContext gc, int minR, int maxR) {
-		int off = 10;
-		int r = minR;
-		while (r <= maxR) {
-			gc.strokeOval(sX, sY - r, r * 2, r * 2);
-			r += off;
-		}
-	}
-
-	private void incCircles(int x, int y, GraphicsContext gc, int lines) {
-		int off = 20;
-		int r = off;
-		while (r <= off * lines) {
-			gc.strokeOval(x - r, y - r, 2 * r, 2 * r);
-			r += off;
-		}
-	}
-
-	private void incLines(GraphicsContext gc, int lines) {
-		int midX = 100;
-		int l = 20;
-		int y = 20;
-		int off = 20;
-		int offset = 0;
-		while (offset <= off * (lines - 1)) {
-			gc.strokeLine(midX - l / 2, y + offset, midX + l / 2, y + offset);
-			l += off;
-			offset += off;
-		}
-	}
-
-	private void verLines(int x, int y, GraphicsContext gc, int lines) {
-		int ex = 100;
-		int off = 20;
-		int offset = 0;
-		while (offset <= off * (lines - 1)) {
-			gc.strokeLine(x, y + offset, ex, y + offset);
-			offset += off;
-		}
-	}
-
-	private void horLines(int x, int y, GraphicsContext gc, int lines) {
-		int eY = 10;
-		int off = 20;
-		int offset = 0;
-		while (offset <= off * (lines - 1)) {
-			gc.strokeLine(x + offset, y, x + offset, eY);
-			offset += off;
-		}
-	}
-
-	private void arrowHead(int x, int y, GraphicsContext gc) {
-		int l = 20;
-		int h = 4;
-		gc.strokeLine(x, y, x + l, y - h);
-		gc.strokeLine(x, y, x + l, y + h);
-	}
-
 	private void arrowRHead(int x, int y, GraphicsContext gc) {
 		int l = 10;
 		int h = 5;
 		gc.strokeLine(x, y, x - l, y - h);
 		gc.strokeLine(x, y, x - l, y + h);
 	}
-
-	private void fan(int x, int y, int lines, GraphicsContext gc) {
-		int eX = 0;
-		int eY = 0;
-		int offset = 0;
-		int off = 25;
-		while (offset <= off * (lines - 1)) {
-			gc.strokeLine(x, y, eX + offset, eY);
-			offset += off;
-		}
-	};
 
 }

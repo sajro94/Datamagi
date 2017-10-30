@@ -10,14 +10,15 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -32,7 +33,7 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage primeStage) {
 		stage = primeStage;
-		stage.setTitle("Combine Names");
+		stage.setTitle("Character Creator");
 		GridPane pane = new GridPane();
 		initContent(pane);
 
@@ -52,18 +53,12 @@ public class MainApp extends Application {
 	private CharacterSheet charWindow;
 
 	private Controller controller = new Controller();
-	private Character character = new Character("Test Character");
+	public static Character character = new Character("Test Character");
 
-	private Stage stage;
-	private TextArea txaInfo;
-	private TextField txfChoice;
-	private Button btnChsArchetype;
+	public static Stage stage;
+	private ListView<Choice> lstChoose;
 	private Button btnChsClass;
-	private Button btnChsSkills;
-	private Button btnShowCharacter;
-	private Button btnSetLvl;
-	private TextField txfLevel;
-	private Label lblChoice;
+	private Button btnLvlUp;
 	private Button btnSave;
 	private Button btnChsRace;
 
@@ -77,64 +72,44 @@ public class MainApp extends Application {
 		// set vertical gap between components
 		pane.setVgap(10);
 		// TextArea to show information
-		txaInfo = new TextArea();
-		txaInfo.setEditable(false);
-		txaInfo.setMinHeight(160);
-		txaInfo.setMinWidth(320);
-		pane.add(txaInfo, 0, 0, 4, 1);
+		lstChoose = new ListView<>();
+		lstChoose.setEditable(false);
+		lstChoose.setMinHeight(160);
+		lstChoose.setMinWidth(320);
+		pane.add(lstChoose, 0, 0, 4, 1);
 		// Label to indicate choice field
-		lblChoice = new Label("Choice");
-		pane.add(lblChoice, 0, 1);
-		// TextField for choice
-		txfChoice = new TextField();
-		pane.add(txfChoice, 1, 1, 3, 1);
 		// Button to show and choose Class
 		btnChsClass = new Button("Show Classes");
-		pane.add(btnChsClass, 1, 2);
-		// Button to show and choose Archetype
-		btnChsArchetype = new Button("Show Archetypes");
-		pane.add(btnChsArchetype, 2, 2);
-		// Button to show and choose skills
-		btnChsSkills = new Button("Show Skills");
-		pane.add(btnChsSkills, 3, 2);
+		pane.add(btnChsClass, 1, 1);
 		// Button to show and choose race
 		btnChsRace = new Button("Show Races");
-		pane.add(btnChsRace, 4, 2);
+		pane.add(btnChsRace, 2, 1);
 		// Button to show features
-		btnShowCharacter = new Button("Show Character");
-		pane.add(btnShowCharacter, 2, 3);
-		// Textfield to set and show level
-		txfLevel = new TextField("1");
-		txfLevel.setStyle("");
-		pane.add(txfLevel, 0, 3);
-		// Button to change level
-		btnSetLvl = new Button("Set Level");
-		pane.add(btnSetLvl, 0, 2);
+		// Button to level up
+		btnLvlUp = new Button("Level Up");
+		pane.add(btnLvlUp, 0, 1);
 		// Button to save to file
 		btnSave = new Button("Save");
-		pane.add(btnSave, 1, 4);
+		pane.add(btnSave, 1, 3);
 		Button btnCharSheet = new Button("Charactersheet");
-		pane.add(btnCharSheet, 1, 5);
+		pane.add(btnCharSheet, 0, 3);
 		btnCharSheet.setOnAction(event -> this.controller.showCharacterSheetAction());
-		btnChsSkills.setOnAction(event -> this.controller.chooseSkillsAction());
-		btnChsClass.setOnAction(event -> this.controller.chooseClassAction());
-		btnChsArchetype.setOnAction(event -> this.controller.chooseArchetypeAction());
-		btnChsRace.setOnAction(event -> this.controller.chooseRaceAction());
-		btnShowCharacter.setOnAction(event -> this.controller.showCharacterAction());
-		btnSetLvl.setOnAction(event -> this.controller.setLevelAction());
+		btnChsClass.setOnAction(event -> this.controller.showClassesAction());
+		btnChsRace.setOnAction(event -> this.controller.showRacesAction());
+		btnLvlUp.setOnAction(event -> this.controller.setLevelAction());
 		btnSave.setOnAction(event -> this.controller.saveFile());
 
 	}
 
 	private class Controller {
 		private Database d = new Database();
-		private Die d4 = new Die("d4", 1, 4);
-		private Die d6 = new Die("d6", 1, 6);
-		private Die d8 = new Die("d8", 1, 8);
+		// private Die d4 = new Die("d4", 1, 4);
+		// private Die d6 = new Die("d6", 1, 6);
+		// private Die d8 = new Die("d8", 1, 8);
 		private Die d10 = new Die("d10", 1, 10);
-		private Die d12 = new Die("d12", 1, 12);
-		private Die d20 = new Die("d20", 1, 20);
-		private Die d100 = new Die("d100", 1, 100);
+		// private Die d12 = new Die("d12", 1, 12);
+		// private Die d20 = new Die("d20", 1, 20);
+		// private Die d100 = new Die("d100", 1, 100);
 		private Ability streng = new Ability("Strength");
 		private Ability dexter = new Ability("Dexterity");
 		private Ability consti = new Ability("Constitution");
@@ -145,7 +120,6 @@ public class MainApp extends Application {
 		public void saveFile() {
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			ArrayList<String> lines = new ArrayList<>();
-			JsonElement tree = gson.toJsonTree(character);
 			lines.add(gson.toJson(character));
 			Path file = Paths.get("test.json");
 			try {
@@ -160,21 +134,36 @@ public class MainApp extends Application {
 			createVighter();
 		}
 
-		private boolean showClasses = false;
-		private boolean showArchtypes = false;
-		private boolean showSkills = false;
-		private boolean showRaces = false;
-
 		private void createVighter() {
 			Class c1 = new Class("Vighter", d10, streng, dexter, 2);
-			Feature f1 = new Feature("Fighting Style",
-					"Choose a fighting Style from the following:\nArchery\nDefense\nDueling\nGreat Weapon Fighting\nProtection\nTwo-Weapon Fighting",
+			OptionFeature f1 = new OptionFeature("Fighting Style", "", 1);
+			Feature f1o1 = new Feature("Archery", "+2 attack when making an attack with a ranged weapon.", 1);
+			Feature f1o2 = new Feature("Defense", "+1 armor class while wearing armor", 1);
+			Feature f1o3 = new Feature("Dueling",
+					"+2 damage when hitting with a melee weapon wielded in one hand, and you have no weapon in the other hand.",
 					1);
+			Feature f1o4 = new Feature("Great Weapons Fighting",
+					"When you deal damage with a melee weapon, you wield in two hands, you can reroll 1's and 2's, the weapon must have the two-handed or versatile property",
+					1);
+			Feature f1o5 = new Feature("Protection",
+					"While wielding a shield you can as a reaction grant disadvantage on an attack roll against an ally within 5 feet.",
+					1);
+			Feature f1o6 = new Feature("Two-Weapon Fighting",
+					"When dual wielding you can add your ability modifier to the damage of the off hand attack.", 1);
+			ArrayList<Choice> fiStl = new ArrayList<>();
+			fiStl.add(f1o1);
+			fiStl.add(f1o2);
+			fiStl.add(f1o3);
+			fiStl.add(f1o4);
+			fiStl.add(f1o5);
+			fiStl.add(f1o6);
+			f1.setChoices(fiStl);
+
 			Feature f2 = new Feature("Second Wind", "Use a bonus action to heal for 1d10+Vighter Level hp", 1);
 			Feature f3 = new Feature("Maneuvers",
 					"Your learn two maneuvers, plus one additional at 3rd, 7th, 10th, 15th, 18th", 2);
 			Feature f4 = new Feature("Action Surge", "Gain the use of an extra Action and possible Bonus Action", 2);
-			Feature f5 = new Feature("Martial Archetype", "Choose your archetype", 3);
+			OptionFeature f5 = new OptionFeature("Martial Archetype", "Choose your archetype", 3);
 			Feature f6 = new Feature("ABSI", "Gain +1 to two stats, +2 to one stat, or a feat", 4);
 			Feature f7 = new Feature("ABSI", "Gain +1 to two stats, +2 to one stat, or a feat", 8);
 			Feature f8 = new Feature("ABSI", "Gain +1 to two stats, +2 to one stat, or a feat", 12);
@@ -198,7 +187,6 @@ public class MainApp extends Application {
 			c1.addFeature(f2);
 			c1.addFeature(f3);
 			c1.addFeature(f4);
-			c1.addFeature(f5);
 			c1.addFeature(f6);
 			c1.addFeature(f7);
 			c1.addFeature(f8);
@@ -223,6 +211,10 @@ public class MainApp extends Application {
 			a1.addFeature(af6);
 
 			c1.addArchetype(a1);
+			ArrayList<Choice> artps = new ArrayList<>();
+			artps.add(a1);
+			f5.setChoices(artps);
+			c1.addFeature(f5);
 
 			Skill s1 = new Skill("Acrobatics", "Make amazing acrobatics!", dexter);
 			Skill s2 = new Skill("Animal Handling", "Train and handle animals", wisdom);
@@ -280,113 +272,64 @@ public class MainApp extends Application {
 			charWindow.showAndWait();
 		}
 
+		private void showClassesAction() {
+			lstChoose.getItems().setAll(d.getClasses());
+			resetButtons();
+			btnChsClass.setText("Choose Class");
+			btnChsClass.setOnAction(event -> chooseClassAction());
+		}
+
 		private void chooseClassAction() {
-			if (showClasses) {
-				int choice = Integer.parseInt(txfChoice.getText());
-				if (choice <= d.getClasses().size()) {
-					txaInfo.setText("You chose a class");
-					character.setCharClass(d.getClasses().get(choice - 1));
-				}
-				btnChsClass.setText("Show Classes");
-				showClasses = false;
+			if ((Class) lstChoose.getSelectionModel().getSelectedItem() != null) {
+				character.setCharClass((Class) lstChoose.getSelectionModel().getSelectedItem());
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Class Selected");
+				alert.setContentText(String.format("You selected the %s class.", character.getClassName()));
+				alert.setTitle("Class Selected");
+				alert.showAndWait();
 			} else {
-				showClasses = true;
-				String content = "";
-				int i = 1;
-				for (Class c : this.d.getClasses()) {
-					content += i + ". " + c.getName() + "\n";
-					i++;
-				}
-				btnChsClass.setText("Choose Class");
-				txaInfo.setText(content);
-			}
-
-		}
-
-		private void chooseArchetypeAction() {
-			if (showArchtypes) {
-				int choice = Integer.parseInt(txfChoice.getText());
-				ArrayList<Archetype> testList = character.getCharClass().getArchetypes();
-				if (choice <= testList.size()) {
-					txaInfo.setText("You chose an archetype");
-					character.setArchetype(testList.get(choice - 1));
-				}
-				showArchtypes = false;
-				btnChsArchetype.setText("Show Archetypes");
-			} else {
-				String content = "";
-				int i = 1;
-				for (Archetype a : character.getCharClass().getArchetypes()) {
-					content += i + ". " + a.getName() + "\n";
-					i++;
-				}
-				txaInfo.setText(content);
-				btnChsArchetype.setText("Choose Archetype");
-				showArchtypes = true;
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Select a Class from the List.");
+				alert.setTitle("Selection Missing");
+				alert.showAndWait();
 			}
 		}
 
-		private void chooseSkillsAction() {
-			if (showSkills) {
-				ArrayList<Skill> testList = character.getCharClass().getSkillList();
-				String choice = txfChoice.getText().trim();
-				String[] choices = choice.split(",");
-				for (String s : choices) {
-					int test = Integer.parseInt(s);
-					if (test <= testList.size()) {
-						character.addSkill(testList.get(test - 1));
-					}
-				}
-				showSkills = false;
-				btnChsSkills.setText("Show Skills");
-			} else {
-				String content = "";
-				int i = 1;
-				for (Skill s : character.getCharClass().getSkillList()) {
-					content += i + ". " + s.getName() + "\n";
-					i++;
-				}
-				content += String.format("As your input give a comma seperated list of %s numbers.%n",
-						character.getCharClass().getSkills());
-				txaInfo.setText(content);
-				showSkills = true;
-				btnChsSkills.setText("Choose skills");
-			}
+		public void showRacesAction() {
+			resetButtons();
+			lstChoose.getItems().setAll(d.getRaces());
+			btnChsRace.setText("Choose Race");
+			btnChsRace.setOnAction(event -> chooseRaceAction());
 		}
 
-		public void chooseRaceAction() {
-			if (showRaces) {
-				int choice = Integer.parseInt(txfChoice.getText());
-				ArrayList<Race> testList = d.getRaces();
-				if (choice <= testList.size()) {
-					txaInfo.setText("You chose a race");
-					character.setRace(testList.get(choice - 1));
-				}
-				btnChsRace.setText("Show Races");
-				showRaces = false;
+		private void chooseRaceAction() {
+			if ((Race) lstChoose.getSelectionModel().getSelectedItem() != null) {
+				character.setRace((Race) lstChoose.getSelectionModel().getSelectedItem());
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Race Selected");
+				alert.setContentText(String.format("You selected the %s Race.", character.getRaceName()));
+				alert.setTitle("Race Selected");
+				alert.showAndWait();
 			} else {
-				String content = "";
-				int i = 1;
-				for (Race r : d.getRaces()) {
-					content += i + ". " + r.getName() + "\n";
-					i++;
-				}
-				txaInfo.setText(content);
-				btnChsRace.setText("Choose Race");
-				showRaces = true;
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Select a Race from the List.");
+				alert.setTitle("Selection Missing");
+				alert.showAndWait();
 			}
-		}
-
-		private void showCharacterAction() {
-			String content = String.format("Name: %s%nClass: %s%nLevel: %s%n%nFeatures:%n%s%n", character.getName(),
-					character.getCharClass().getName(), character.getLevel(), character.featuresToString());
-			content += String.format("Proficiencies: %n%s%n", character.skillsToString());
-			txaInfo.setText(content);
 		}
 
 		private void setLevelAction() {
-			int lvl = Integer.parseInt(txfLevel.getText());
-			character.setLevel(lvl);
+			character.levelUp();
+
+		}
+
+		public void resetButtons() {
+			btnChsClass.setText("Show Classes");
+			btnChsClass.setOnAction(event -> showClassesAction());
+			btnChsRace.setText("Show Races");
+			btnChsRace.setOnAction(event -> showRacesAction());
+			lstChoose.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
 		}
 	}
 

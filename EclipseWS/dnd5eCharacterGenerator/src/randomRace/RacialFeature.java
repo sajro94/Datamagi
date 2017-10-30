@@ -8,4 +8,53 @@ public class RacialFeature {
 	private int power; // This is uses to determine which feature is the "strongest" feature when
 	// overriding
 	private int rp; // The cost of the feature in RP
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public String getFull() {
+		return full;
+	}
+
+	public void setFull(String full) {
+		this.full = full;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getPower() {
+		return power;
+	}
+
+	public void setPower(int power) {
+		this.power = power;
+	}
+
+	public int getRp() {
+		return rp;
+	}
+
+	public void setRp(int rp) {
+		this.rp = rp;
+	}
+
 }

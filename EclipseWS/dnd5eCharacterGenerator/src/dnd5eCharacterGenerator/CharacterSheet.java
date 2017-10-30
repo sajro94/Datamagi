@@ -42,9 +42,9 @@ public class CharacterSheet extends Stage {
 		pane.getStyleClass().add("character-sheet");
 
 		Label lblName = new Label(chara.getName());
-		Label lblClassLvl = new Label(String.format("%s(%s) %s", chara.getCharClass().getName(),
-				chara.getArchetype().getName(), chara.getLevel()));
-		Label lblRace = new Label(chara.getRace().getName());
+		Label lblClassLvl = new Label(
+				String.format("%s(%s) %s", chara.getClassName(), chara.getArchName(), chara.getLevel()));
+		Label lblRace = new Label(chara.getRaceName());
 		lstFeatures = new ListView<>();
 		lstFeatures.getItems().setAll(chara.getFeatures());
 		lstSkills = new ListView<>();

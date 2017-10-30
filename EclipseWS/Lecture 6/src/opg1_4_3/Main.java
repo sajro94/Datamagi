@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in).useLocale(Locale.US);
+		Scanner scanner = new Scanner(System.in);
+		Scanner in = scanner.useLocale(Locale.US);
 		boolean integer = false;
 		int num[] = { 0, 0, 0 };
 		for (int i = 0; i < 3; i++) {
@@ -29,7 +30,7 @@ public class Main {
 		} else {
 			System.out.println("Neither!");
 		}
-		in.close();
+		scanner.close();
 	}
 
 }

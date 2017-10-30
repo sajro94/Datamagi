@@ -36,7 +36,6 @@
 	<section name="ZipFileImportWizard">
 		<item value="false" key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
-			<item value="C:\Users\Flemming\Downloads\Yatzy.jar"/>
 			<item value="C:\Users\Flemming\Downloads\JavaFX_GUI_examples_part2.jar"/>
 			<item value="C:\Users\Flemming\Downloads\GUI_student_app.jar"/>
 			<item value="C:\Users\Flemming\Downloads\JavaFX_GUI_examples.jar"/>

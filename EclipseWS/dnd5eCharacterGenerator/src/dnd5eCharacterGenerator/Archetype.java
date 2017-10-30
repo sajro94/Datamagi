@@ -2,14 +2,13 @@ package dnd5eCharacterGenerator;
 
 import java.util.ArrayList;
 
-public class Archetype {
-	private String name;
-	private ArrayList<Feature> features;
-
+public class Archetype extends Choice {
 	public Archetype(String name) {
+		super(name);
 		features = new ArrayList<>();
-		this.name = name;
 	}
+
+	private ArrayList<Feature> features;
 
 	public void addFeature(Feature feature) {
 		features.add(feature);
@@ -21,10 +20,6 @@ public class Archetype {
 
 	public Feature getFeature(int level) {
 		return features.get(level);
-	}
-
-	public String getName() {
-		return name;
 	}
 
 }
