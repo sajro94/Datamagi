@@ -6,6 +6,13 @@ public class Die {
 	private int max;
 	private int avg;
 	private Double trueAvg;
+	static final Die D4 = new Die("d4", 1, 4);
+	static final Die D6 = new Die("d6", 1, 6);
+	static final Die D8 = new Die("d8", 1, 8);
+	static final Die D10 = new Die("d10", 1, 10);
+	static final Die D12 = new Die("d12", 1, 12);
+	static final Die D20 = new Die("d20", 1, 20);
+	static final Die D100 = new Die("d100", 1, 100);
 
 	public Die(String annotation, int min, int max) {
 		this.annotation = annotation;
