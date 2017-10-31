@@ -1,7 +1,6 @@
 package dnd5eCharacterGenerator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import javafx.scene.control.Alert;
@@ -21,7 +20,17 @@ public class Character {
 	private ArrayList<Feature> raceFeatures;
 	private ArrayList<Feature> archeFeatures;
 
+	@SuppressWarnings("unused")
 	private Ability[] abilities;
+
+	public Character(String name) {
+		this.name = name;
+		skillProfs = new ArrayList<>();
+		charFeatures = new ArrayList<>();
+		this.level = 1;
+		abilities = new Ability[] { Ability.STRENGTH, Ability.DEXTERITY, Ability.CONSTITUTION, Ability.INTELLIGENCE,
+				Ability.WISDOM, Ability.CHARISMA };
+	}
 
 	public ArrayList<Feature> getFeatures() {
 		return charFeatures;
@@ -33,14 +42,13 @@ public class Character {
 
 	private void featureList(ArrayList<Feature> features) {
 		if (features != null) {
-			boolean done = false;
-			for (int i = 0; i < features.size() && !done; i++) {
-				if (features.get(i).getLevel() <= level) {
-					charFeatures.add(features.get(i));
-					features.remove(i);
-				} else {
-					done = true;
+			while (features.size() != 0 && features.get(0).getLevel() <= level) {
+				if (features.get(0).getClass().equals(OptionFeature.class)) {
+					executeFeature((OptionFeature) features.get(0));
 				}
+				charFeatures.add(features.get(0));
+				features.remove(0);
+
 			}
 		}
 	}
@@ -48,33 +56,55 @@ public class Character {
 	private void executeFeature(OptionFeature test) {
 		ArrayList<Choice> choices = test.getChoices();
 		if (choices.get(0).getClass().equals(Archetype.class)) {
-			singleChoice(choices, "Archetype");
+			makeChoices(choices, "Archetype", test.isMulti(), test.getName(), test.getLimit());
+		} else if (choices.get(0).getClass().equals(Skill.class)) {
+			makeChoices(choices, "Skill", test.isMulti(), test.getName(), test.getLimit());
+		} else if (choices.get(0).getClass().equals(Feature.class)) {
+			makeChoices(choices, "Feature", test.isMulti(), test.getName(), test.getLimit());
 		}
 	}
 
-	private boolean xClose;
+	private boolean xClose = true;
 
-	private void singleChoice(ArrayList<Choice> choices, String choiceType) {
-		ChoiceWindow chw = new ChoiceWindow(MainApp.stage, choiceType);
-		chw.setChoices(choices);
-		xClose = false;
-		chw.setOnCloseRequest(event -> xClosed());
-		chw.showAndWait();
-		if (!xClose) {
+	private void makeChoices(ArrayList<Choice> choices, String choiceType, boolean multi, String parentFeature,
+			int limit) {
+		xClose = true;
+		while (xClose) {
+			ChoiceWindow chw = new ChoiceWindow(MainApp.stage, choiceType);
+			chw.setMulti(multi);
+			chw.setChoices(choices);
+			chw.setLimit(limit);
+			xClose = false;
+			chw.setOnCloseRequest(event -> xClosed());
+			chw.showAndWait();
+			if (!xClose) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText(String.format("%s%s Selected", choiceType, multi ? "s" : ""));
+				switch (choiceType) {
+				case "Archetype":
+					setArchetype(chw.getArch());
+					alert.setContentText(String.format("You selected the %s archetype.", archName));
+					break;
+				case "Feature":
+					Feature temp = chw.getFeature();
+					alert.setContentText(String.format("You selected the %s feature", temp.getName()));
+					temp.setName(parentFeature + ": " + temp.getName());
+					charFeatures.add(temp);
+					break;
+				case "Skill":
+					for (Skill s : chw.getSkills()) {
+						addSkill(s);
+					}
+					alert.setContentText(
+							String.format("You selected the %s skill%s", chw.getSkills(), multi ? "s" : ""));
+					break;
 
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setHeaderText(String.format("%s Selected", choiceType));
-			switch (choiceType) {
-			case "Archetype":
-				setArchetype(chw.getArch());
-				alert.setContentText(String.format("You selected the %s archetype.", archName));
-				break;
-			case "Feature":
+				}
+				alert.showAndWait();
 
+			} else {
+				xClose = true;
 			}
-
-			alert.setTitle("Archetype Selected");
-			alert.showAndWait();
 		}
 	}
 
@@ -82,7 +112,7 @@ public class Character {
 		xClose = true;
 	}
 
-	private void chooseClassSkills(ArrayList<Skill> input) {
+	private void chooseClassSkills(ArrayList<Skill> input, int limit) {
 		ChoiceWindow skillChs = new ChoiceWindow(MainApp.stage, "");
 		ArrayList<Choice> choices = new ArrayList<>();
 		for (Skill s : input) {
@@ -90,7 +120,11 @@ public class Character {
 		}
 		skillChs.setChoices(choices);
 		skillChs.setMulti(true);
+		skillChs.setLimit(limit);
 		skillChs.showAndWait();
+		for (Skill s : skillChs.getSkills()) {
+			addSkill(s);
+		}
 	}
 
 	public String featuresToString() {
@@ -103,13 +137,6 @@ public class Character {
 
 	public void addSkill(Skill s) {
 		skillProfs.add(s);
-	}
-
-	public Character(String name) {
-		this.name = name;
-		skillProfs = new ArrayList<>();
-		charFeatures = new ArrayList<>();
-		this.level = 1;
 	}
 
 	public String getName() {
@@ -125,7 +152,7 @@ public class Character {
 		className = charClass.getName();
 		Collections.sort(classFeatures, (o1, o2) -> o1.getLevel() - o2.getLevel());
 		System.out.println(classFeatures);
-		chooseClassSkills(charClass.getSkillList());
+		chooseClassSkills(charClass.getSkillList(), charClass.getSkills());
 		featureList(classFeatures);
 
 	}

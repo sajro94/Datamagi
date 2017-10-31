@@ -37,4 +37,5 @@
 <fullyQualifiedTypeName name="javafx.scene.control.ListView"/>
 <fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="dnd5eCharacterGenerator.Ability"/>
 </qualifiedTypeNameHistroy>

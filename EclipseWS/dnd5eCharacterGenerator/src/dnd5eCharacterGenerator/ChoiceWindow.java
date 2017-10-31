@@ -37,6 +37,7 @@ public class ChoiceWindow extends Stage {
 	private boolean multi = false;
 	private int limit = 1;
 	private ArrayList<Skill> skills;
+	private Feature feature;
 
 	private void initContent(GridPane pane) {
 		new ArrayList<>();
@@ -58,8 +59,11 @@ public class ChoiceWindow extends Stage {
 			if (choiceClass.equals(Archetype.class)) {
 				arch = (Archetype) lstChoices.getSelectionModel().getSelectedItem();
 				hide();
+			} else if (choiceClass.equals(Feature.class)) {
+				setFeature((Feature) lstChoices.getSelectionModel().getSelectedItem());
+				hide();
 			}
-		} else if (multi && lstChoices.getSelectionModel().getSelectedItems().size() != 0) {
+		} else if (lstChoices.getSelectionModel().getSelectedItems().size() != 0) {
 			Object choiceClass = lstChoices.getSelectionModel().getSelectedItems().get(0).getClass();
 			if (choiceClass.equals(Skill.class)) {
 				ObservableList<Choice> obsSkills = lstChoices.getSelectionModel().getSelectedItems();
@@ -80,7 +84,6 @@ public class ChoiceWindow extends Stage {
 	}
 
 	public Archetype getArch() {
-		// TODO Auto-generated method stub
 		return arch;
 	}
 
@@ -93,5 +96,17 @@ public class ChoiceWindow extends Stage {
 
 	public void setLimit(int limit) {
 		this.limit = limit;
+	}
+
+	public ArrayList<Skill> getSkills() {
+		return this.skills;
+	}
+
+	public Feature getFeature() {
+		return feature;
+	}
+
+	public void setFeature(Feature feature) {
+		this.feature = feature;
 	}
 }
