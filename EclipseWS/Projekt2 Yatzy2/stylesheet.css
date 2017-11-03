@@ -1,0 +1,7 @@
+/*Changes how the buttons looks when they are disabled
+ *
+ */
+#scored:disabled{
+    -fx-background-color: transparent;
+    -fx-opacity: 100;   
+}

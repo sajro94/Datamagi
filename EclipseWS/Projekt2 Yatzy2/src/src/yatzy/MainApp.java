@@ -1,16 +1,12 @@
 package src.yatzy;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;

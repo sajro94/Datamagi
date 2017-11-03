@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Race extends Choice {
 	ArrayList<Feature> features;
-	ArrayList<Pair<Ability, Integer>> ABSI;
+	ArrayList<Ability> ABSI;
 	String name;
 	ArrayList<Runnable> statChangers;
 
@@ -15,12 +15,7 @@ public class Race extends Choice {
 		statChangers = new ArrayList<>();
 	}
 
-	public void addAbsi(Ability abi, int mod) {
-		Pair<Ability, Integer> p = new Pair<>(abi, mod);
-		ABSI.add(p);
-	}
-
-	public ArrayList<Pair<Ability, Integer>> getAbsi() {
+	public ArrayList<Ability> getAbsi() {
 		return this.ABSI;
 	}
 
@@ -30,5 +25,10 @@ public class Race extends Choice {
 
 	public ArrayList<Feature> getFeatures() {
 		return this.features;
+	}
+
+	public void addAbsi(Ability ability) {
+		ABSI.add(ability);
+
 	}
 }

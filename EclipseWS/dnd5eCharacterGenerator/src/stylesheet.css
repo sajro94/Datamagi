@@ -1,0 +1,6 @@
+#cell{
+-fx-border-width    :   1 1 1 1;
+-fx-border-color    :   black;
+-fx-pref-width      :   80;
+-fx-pref-height     :   20; 
+}

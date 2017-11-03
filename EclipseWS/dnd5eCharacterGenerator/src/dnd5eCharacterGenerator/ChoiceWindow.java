@@ -37,7 +37,9 @@ public class ChoiceWindow extends Stage {
 	private boolean multi = false;
 	private int limit = 1;
 	private ArrayList<Skill> skills;
+	private ArrayList<Ability> abilities;
 	private Feature feature;
+	private ArrayList<Feature> features;
 
 	private void initContent(GridPane pane) {
 		new ArrayList<>();
@@ -54,29 +56,49 @@ public class ChoiceWindow extends Stage {
 	}
 
 	private void chooseAction() {
-		if (!multi && lstChoices.getSelectionModel().getSelectedItem() != null) {
-			Object choiceClass = lstChoices.getSelectionModel().getSelectedItem().getClass();
+		if (lstChoices.getSelectionModel().getSelectedItems().size() != 0) {
+			Object choiceClass = lstChoices.getSelectionModel().getSelectedItems().get(0).getClass();
+			ObservableList<Choice> obsOptions = lstChoices.getSelectionModel().getSelectedItems();
+
 			if (choiceClass.equals(Archetype.class)) {
 				arch = (Archetype) lstChoices.getSelectionModel().getSelectedItem();
 				hide();
 			} else if (choiceClass.equals(Feature.class)) {
-				setFeature((Feature) lstChoices.getSelectionModel().getSelectedItem());
-				hide();
-			}
-		} else if (lstChoices.getSelectionModel().getSelectedItems().size() != 0) {
-			Object choiceClass = lstChoices.getSelectionModel().getSelectedItems().get(0).getClass();
-			if (choiceClass.equals(Skill.class)) {
-				ObservableList<Choice> obsSkills = lstChoices.getSelectionModel().getSelectedItems();
-				ArrayList<Skill> skills = new ArrayList<>();
-				for (Choice c : obsSkills) {
-					skills.add((Skill) c);
+				ArrayList<Feature> features = multiList(obsOptions);
+				if (features.size() == limit || !multi) {
+					this.features = features;
+					hide();
 				}
+			} else if (choiceClass.equals(Skill.class)) {
+				ArrayList<Skill> skills = multiList(obsOptions);
 				if (skills.size() == limit) {
 					this.skills = skills;
 					hide();
 				}
+			} else if (choiceClass.equals(Ability.class)) {
+				ArrayList<Ability> abs = multiList(obsOptions);
+				if (abs.size() <= limit) {
+					if (abs.size() == 1) {
+						abs.get(0).setScore(2);
+					} else {
+						for (int j = 0; j < abs.size(); j++) {
+							abs.get(j).setScore(1);
+						}
+					}
+					this.abilities = abs;
+					hide();
+				}
 			}
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T extends Choice> ArrayList<T> multiList(ObservableList<Choice> choices) {
+		ArrayList<T> list = new ArrayList<>();
+		for (Choice c : choices) {
+			list.add((T) c);
+		}
+		return list;
 	}
 
 	public void setChoices(ArrayList<Choice> choices) {
@@ -109,4 +131,13 @@ public class ChoiceWindow extends Stage {
 	public void setFeature(Feature feature) {
 		this.feature = feature;
 	}
+
+	public ArrayList<Ability> getAbilities() {
+		return abilities;
+	}
+
+	public ArrayList<Feature> getFeatures() {
+		return features;
+	}
+
 }

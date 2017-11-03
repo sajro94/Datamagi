@@ -1,6 +1,5 @@
 package src.yatzy;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**

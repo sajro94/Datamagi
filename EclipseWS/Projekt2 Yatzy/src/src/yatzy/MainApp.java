@@ -1,8 +1,10 @@
 package src.yatzy;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -33,7 +35,7 @@ public class MainApp extends Application {
 	private ToggleButton[] btnValues;
 	private String[] scoreNames = { "1'ere", "2'ere", "3'ere", "4'ere", "5'ere", "6'ere", "Et Par", "To Par", "Tre Ens",
 			"Fire Ens", "Fuldt Hus", "Lille Straight", "Stor Straight", "Chance", "Yatzy" };
-	private Button[] btnScores;
+	private ToggleButton[] btnScores;
 	private Label[] lblScores;
 	private Label lblBonusName;
 	private Label lblTotalName;
@@ -47,15 +49,10 @@ public class MainApp extends Application {
 
 	// Shows the hold status of the 5 dice.
 	private boolean[] holds;
-	private boolean[] scored;
 
 	private void initContent(GridPane pane) {
 		btnValues = new ToggleButton[5];
 		holds = new boolean[] { false, false, false, false, false };
-		scored = new boolean[15];
-		for (int i = 0; i < 15; i++) {
-			scored[i] = false;
-		}
 		pane.setGridLinesVisible(false);
 		pane.setPadding(new Insets(10));
 		pane.setHgap(10);
@@ -91,14 +88,14 @@ public class MainApp extends Application {
 
 		// ---------------------------------------------------------------------
 
-		btnScores = new Button[15];
+		btnScores = new ToggleButton[15];
 		lblScores = new Label[15];
 
 		GridPane scorePane = new GridPane();
 		for (int i = 0; i < 15; i++) {
 			int index = i;
 			lblScores[i] = new Label(scoreNames[i]);
-			btnScores[i] = new Button("0");
+			btnScores[i] = new ToggleButton("0");
 			btnScores[i].setPrefSize(40, 25);
 			btnScores[i].setId("open");
 			btnScores[i].setDisable(true);
@@ -145,14 +142,20 @@ public class MainApp extends Application {
 		}
 		totalScore += results[index];
 		lblTotalScore.setText("" + totalScore);
-		scored[index] = true;
 		toggleScoreButtons(true);
 		toggleRollButton();
 		btnScores[index].setDisable(true);
 		btnScores[index].setId("scored");
 		if (allScored()) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Game Finished");
+			alert.setContentText(String.format(
+					"You finished the game scoring %s points.%nYou scored %s points in 1's through 6's this was %s to give 50 bonus points.",
+					totalScore, bonusCheck, bonusCheck >= 63 ? "enough" : "not enough"));
+
 			btnRoll.setText("Reset Game");
 			btnRoll.setOnAction(event -> resetGameAction());
+			alert.showAndWait();
 		}
 	}
 
@@ -160,7 +163,7 @@ public class MainApp extends Application {
 		for (int i = 0; i < 15; i++) {
 			btnScores[i].setText("0");
 			btnScores[i].setId("open");
-			scored[i] = false;
+			btnScores[i].setSelected(false);
 		}
 		lblTotalScore.setText("0");
 		lblBonusScore.setText("0");
@@ -195,7 +198,7 @@ public class MainApp extends Application {
 	private void showResults() {
 		results = yatzy.getPossibleResults();
 		for (int i = 0; i < btnScores.length; i++) {
-			if (!scored[i]) {
+			if (!btnScores[i].isSelected()) {
 				btnScores[i].setText("" + results[i]);
 			}
 		}
@@ -209,7 +212,7 @@ public class MainApp extends Application {
 
 	private void toggleScoreButtons(boolean b) {
 		for (int i = 0; i < btnScores.length; i++) {
-			if (!scored[i]) {
+			if (!btnScores[i].isSelected()) {
 				btnScores[i].setDisable(b);
 			}
 		}
@@ -235,8 +238,8 @@ public class MainApp extends Application {
 	}
 
 	private boolean allScored() {
-		for (boolean b : scored) {
-			if (!b) {
+		for (ToggleButton b : btnScores) {
+			if (!b.isSelected()) {
 				return false;
 			}
 		}

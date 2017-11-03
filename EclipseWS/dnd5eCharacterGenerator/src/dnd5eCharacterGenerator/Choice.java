@@ -15,4 +15,5 @@ public class Choice {
 	public String getName() {
 		return name;
 	}
+
 }

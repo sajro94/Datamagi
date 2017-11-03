@@ -22,6 +22,10 @@ public class Feature extends Choice {
 		return level;
 	}
 
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 	@Override
 	public String getName() {
 		return name;
