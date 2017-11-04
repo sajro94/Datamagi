@@ -34,12 +34,8 @@
 		</list>
 	</section>
 	<section name="ZipFileImportWizard">
-		<item value="true" key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
+		<item value="false" key="WizardZipFileResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<list key="WizardZipFileResourceImportPage1.STORE_SOURCE_NAMES_ID">
-			<item value="C:\Users\Flemming\Desktop\Swimmer.jar"/>
-			<item value="C:\Users\Flemming\Desktop\Yatzy (1).jar"/>
-			<item value="C:\Users\Flemming\Desktop\jfxrt.jar"/>
-			<item value="C:\Users\Flemming\Downloads\Yatzy.jar"/>
 			<item value="C:\Users\Flemming\Downloads\JavaFX_GUI_examples_part2.jar"/>
 			<item value="C:\Users\Flemming\Downloads\GUI_student_app.jar"/>
 			<item value="C:\Users\Flemming\Downloads\JavaFX_GUI_examples.jar"/>

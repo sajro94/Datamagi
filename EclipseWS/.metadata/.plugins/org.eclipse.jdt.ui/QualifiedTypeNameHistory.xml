@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javafx.scene.control.Alert.AlertType"/>
-<fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
-<fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="model.TrainingPlan"/>
+<fullyQualifiedTypeName name="javafx.scene.layout.Pane"/>
+<fullyQualifiedTypeName name="javafx.stage.Stage"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ChoiceBox"/>
+<fullyQualifiedTypeName name="dnd5eCharacterGenerator.Ability"/>
+<fullyQualifiedTypeName name="javafx.scene.control.Button"/>
+<fullyQualifiedTypeName name="javafx.scene.control.ToggleButton"/>
+<fullyQualifiedTypeName name="java.util.regex.Pattern"/>
+<fullyQualifiedTypeName name="java.util.regex.Matcher"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="statGenerator.DieRoller"/>
+<fullyQualifiedTypeName name="dieRoller.AnnotationRoller"/>
 </qualifiedTypeNameHistroy>

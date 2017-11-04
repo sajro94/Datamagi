@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=dnd5eCharacterGenerator/C:\/Program Files\/Java\/jdk1.8.0_144\/jre\/lib\/ext\/jfxrt.jar&lt;javafx.stage(Stage.class[Stage" modifiers="33" timestamp="1504615866666"/>
-<typeInfo handle="=BehindTheTables/C:\/Program Files\/Java\/jdk1.8.0_144\/jre\/lib\/ext\/jfxrt.jar&lt;javafx.application(Application.class[Application" modifiers="1057" timestamp="1504615866666"/>
+<typeInfo handle="=dnd5eCharacterGenerator/C:\/Program Files\/Java\/jdk1.8.0_144\/jre\/lib\/ext\/jfxrt.jar&lt;javafx.stage(Stage.class[Stage" modifiers="1" timestamp="1504706558403"/>
+<typeInfo handle="=dnd5eCharacterGenerator/src&lt;dnd5eCharacterGenerator{Feature.java[Feature" modifiers="1" timestamp="1509722041204"/>
+<typeInfo handle="=dnd5eCharacterGenerator/src&lt;statGenerator{Generator.java[Generator" modifiers="1025" timestamp="1509751013249"/>
+<typeInfo handle="=dnd5eCharacterGenerator/C:\/Program Files\/Java\/jdk1.8.0_144\/jre\/lib\/ext\/jfxrt.jar&lt;javafx.application(Application.class[Application" modifiers="1057" timestamp="1504706558403"/>
 </typeInfoHistroy>

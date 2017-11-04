@@ -93,10 +93,14 @@ public class CharGen extends Application {
 		btnCharSheet = new Button("Charactersheet");
 		pane.add(btnCharSheet, 2, 1);
 
+		Button btnStatGen = new Button("Stat Gens");
+		pane.add(btnStatGen, 3, 3);
+
 		btnLvlUp.setDisable(true);
 		btnSave.setDisable(true);
 		btnCharSheet.setDisable(true);
 
+		btnStatGen.setOnAction(event -> this.controller.openStatGensAction());
 		btnCharSheet.setOnAction(event -> this.controller.showCharacterSheetAction());
 		btnLvlUp.setOnAction(event -> this.controller.setLevelAction());
 		btnSave.setOnAction(event -> this.controller.saveFile());
@@ -117,6 +121,11 @@ public class CharGen extends Application {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+
+		public void openStatGensAction() {
+			GamblingDealerWindow gdw = new GamblingDealerWindow(stage, "Stat Generator!");
+			gdw.showAndWait();
 		}
 
 		private Label[] lblAbilities;

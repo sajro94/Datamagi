@@ -18,8 +18,8 @@ public class Die {
 		this.annotation = annotation;
 		this.min = min;
 		this.max = max;
-		this.avg = (int) Math.ceil((double) (min + max) / 2.0);
-		this.trueAvg = (double) (min + max) / 2.0;
+		this.avg = (int) Math.ceil((min + max) / 2.0);
+		this.trueAvg = (min + max) / 2.0;
 	}
 
 	public String getAnnotation() {
