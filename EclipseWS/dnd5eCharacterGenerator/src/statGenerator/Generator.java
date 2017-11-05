@@ -7,11 +7,17 @@ public abstract class Generator {
 	protected int[] stats;
 	protected String desc;
 	protected boolean fixed;
+	protected String name;
 
 	public Generator() {
 		stats = new int[6];
 		desc = "A stat Generator";
 		fixed = false;
+	}
+
+	@Override
+	public final String toString() {
+		return name;
 	}
 
 	public final boolean isFixed() {

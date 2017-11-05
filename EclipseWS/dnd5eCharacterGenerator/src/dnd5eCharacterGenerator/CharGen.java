@@ -124,8 +124,8 @@ public class CharGen extends Application {
 		}
 
 		public void openStatGensAction() {
-			GamblingDealerWindow gdw = new GamblingDealerWindow(stage, "Stat Generator!");
-			gdw.showAndWait();
+			StatWindow statWindow = new StatWindow(stage, "Stat Generator!");
+			statWindow.showAndWait();
 		}
 
 		private Label[] lblAbilities;

@@ -6,6 +6,7 @@ public class StandardCardGen extends Generator {
 		super();
 		desc = "Generate stats based on a deck of 18 card 3 of each card from 1 to 6.";
 		fixed = false;
+		name = "Standard Card Gen";
 	}
 
 	private void swap(int[] array, int i1, int i2) {

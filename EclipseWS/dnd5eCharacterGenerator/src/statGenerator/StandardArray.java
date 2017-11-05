@@ -6,6 +6,7 @@ public class StandardArray extends Generator {
 		super();
 		desc = "Gives a standard array of [15,14,13,12,10,8]";
 		fixed = false;
+		name = "Standard Array";
 	}
 
 	@Override

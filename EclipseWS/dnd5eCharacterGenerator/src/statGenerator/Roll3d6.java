@@ -6,6 +6,7 @@ public class Roll3d6 extends Generator {
 		super();
 		desc = "Creates stats by rolling 3d6 6 times.";
 		fixed = false;
+		name = "3d6 once";
 	}
 
 	@Override

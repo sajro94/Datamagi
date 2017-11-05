@@ -6,6 +6,7 @@ public class Roll2x3d6_dl1 extends Generator {
 		super();
 		desc = "Creates stats by rolling 3d6 6 times.";
 		fixed = false;
+		name = "3d6 twice, drop lowest";
 	}
 
 	@Override

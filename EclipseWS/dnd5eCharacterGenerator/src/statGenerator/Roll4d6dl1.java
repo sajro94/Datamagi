@@ -6,6 +6,7 @@ public class Roll4d6dl1 extends Generator {
 		super();
 		desc = "Creates stats by rolling 4d6 drop lowest 6 times.";
 		fixed = false;
+		name = "4d6 once, drop lowest die";
 	}
 
 	@Override
