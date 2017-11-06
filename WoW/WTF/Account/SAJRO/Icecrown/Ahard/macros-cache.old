@@ -1,0 +1,6 @@
+MACRO 16777217 "Healing Touch(S)" Spell_Nature_HealingTouch
+#showtooltip
+/run if InCombatLockdown() then SetCVar("autounshift",0) enda
+/cast Healing Touch
+/console autounshift 1
+END

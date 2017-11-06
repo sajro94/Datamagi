@@ -1,0 +1,83 @@
+
+ElvDB = {
+	["profileKeys"] = {
+		["Ahard - Icecrown"] = "Ahard - Icecrown",
+	},
+	["gold"] = {
+		["Icecrown"] = {
+			["Ahard"] = 19171,
+		},
+	},
+	["namespaces"] = {
+		["LibDualSpec-1.0"] = {
+		},
+	},
+	["global"] = {
+		["uiScale"] = "1.0",
+		["nameplates"] = {
+			["filters"] = {
+				["Boss"] = {
+				},
+			},
+		},
+	},
+	["profiles"] = {
+		["Ahard - Icecrown"] = {
+			["general"] = {
+				["valuecolor"] = {
+					["b"] = 0.04,
+					["g"] = 0.49,
+					["r"] = 1,
+				},
+			},
+			["movers"] = {
+				["ElvUF_Raid40Mover"] = "TOPLEFT,ElvUIParent,BOTTOMLEFT,4,432",
+				["ShiftAB"] = "TOPLEFT,ElvUIParent,BOTTOMLEFT,4,1076",
+				["ElvUF_PartyMover"] = "BOTTOMLEFT,ElvUIParent,BOTTOMLEFT,4,195",
+				["ElvUF_RaidMover"] = "TOPLEFT,ElvUIParent,BOTTOMLEFT,4,427",
+				["ElvAB_2"] = "BOTTOM,ElvUIParent,BOTTOM,0,38",
+				["ElvUF_RaidpetMover"] = "TOPLEFT,ElvUIParent,BOTTOMLEFT,4,736",
+			},
+			["unitframe"] = {
+				["units"] = {
+					["player"] = {
+						["buffs"] = {
+							["noDuration"] = false,
+						},
+					},
+				},
+				["colors"] = {
+					["auraBarBuff"] = {
+						["b"] = 0.04,
+						["g"] = 0.49,
+						["r"] = 1,
+					},
+					["healthclass"] = true,
+					["castClassColor"] = true,
+					["castColor"] = {
+						["b"] = 0.1,
+						["g"] = 0.1,
+						["r"] = 0.1,
+					},
+					["health"] = {
+						["b"] = 0.1,
+						["g"] = 0.1,
+						["r"] = 0.1,
+					},
+				},
+			},
+			["layoutSet"] = "tank",
+		},
+	},
+}
+ElvPrivateDB = {
+	["profileKeys"] = {
+		["Ahard - Icecrown"] = "Ahard - Icecrown",
+	},
+	["profiles"] = {
+		["Ahard - Icecrown"] = {
+			["theme"] = "class",
+			["install_complete"] = "5.36",
+		},
+	},
+}
