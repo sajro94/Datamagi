@@ -5,7 +5,7 @@ ElvDB = {
 	},
 	["gold"] = {
 		["Icecrown"] = {
-			["Ahard"] = 2206,
+			["Ahard"] = 15053,
 		},
 	},
 	["namespaces"] = {
@@ -24,19 +24,21 @@ ElvDB = {
 	["profiles"] = {
 		["Ahard - Icecrown"] = {
 			["currentTutorial"] = 1,
-			["general"] = {
-				["minimap"] = {
-					["icons"] = {
-						["vehicleLeave"] = {
-							["hide"] = true,
-						},
-					},
+			["bags"] = {
+				["bagSize"] = 40,
+				["bagWidth"] = 542,
+				["bagBar"] = {
+					["showBackdrop"] = true,
+					["size"] = 24,
+					["spacing"] = 10,
+					["mouseover"] = true,
+					["backdropSpacing"] = 10,
+					["growthDirection"] = "HORIZONTAL",
 				},
-				["valuecolor"] = {
-					["b"] = 0.04,
-					["g"] = 0.49,
-					["r"] = 1,
+				["ignoredItems"] = {
+					["skinning"] = "skinning",
 				},
+				["bankSize"] = 40,
 			},
 			["hideTutorial"] = 1,
 			["layoutSet"] = "tank",
@@ -58,22 +60,36 @@ ElvDB = {
 				},
 				["colors"] = {
 					["auraBarBuff"] = {
-						["b"] = 0.04,
-						["g"] = 0.49,
 						["r"] = 1,
+						["g"] = 0.49,
+						["b"] = 0.04,
 					},
 					["healthclass"] = true,
 					["castClassColor"] = true,
 					["castColor"] = {
-						["r"] = 0.1,
-						["g"] = 0.1,
 						["b"] = 0.1,
+						["g"] = 0.1,
+						["r"] = 0.1,
 					},
 					["health"] = {
-						["r"] = 0.1,
-						["g"] = 0.1,
 						["b"] = 0.1,
+						["g"] = 0.1,
+						["r"] = 0.1,
 					},
+				},
+			},
+			["general"] = {
+				["minimap"] = {
+					["icons"] = {
+						["vehicleLeave"] = {
+							["hide"] = true,
+						},
+					},
+				},
+				["valuecolor"] = {
+					["r"] = 1,
+					["g"] = 0.49,
+					["b"] = 0.04,
 				},
 			},
 		},
