@@ -5,7 +5,11 @@ ElvDB = {
 	},
 	["gold"] = {
 		["Icecrown"] = {
+<<<<<<< HEAD
 			["Ahard"] = 187,
+=======
+			["Ahard"] = 487,
+>>>>>>> e58fde726ac75577f08015f29687b22200f85a8a
 		},
 	},
 	["namespaces"] = {
@@ -81,8 +85,14 @@ ElvDB = {
 			["actionbar"] = {
 				["bar2"] = {
 					["enabled"] = true,
+<<<<<<< HEAD
 					["buttonsPerRow"] = 4,
 					["visibility"] = "[mounted]hide;show",
+=======
+					["mouseover"] = true,
+					["buttonsPerRow"] = 4,
+					["visibility"] = "",
+>>>>>>> e58fde726ac75577f08015f29687b22200f85a8a
 				},
 			},
 			["general"] = {
