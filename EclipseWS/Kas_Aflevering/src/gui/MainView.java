@@ -17,12 +17,14 @@ public class MainView extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		thisStage = stage;
-		stage.setTitle("Combine Names");
+		stage.setTitle("Conference Administration System");
 		GridPane pane = new GridPane();
 		initContent(pane);
 
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);
+		// HotelCreateView htl = new HotelCreateView(stage);
+		// htl.showAndWait();
 		stage.show();
 
 	}
@@ -69,7 +71,7 @@ public class MainView extends Application {
 	}
 
 	private void createConferenceAction() {
-		ConferenceCreateView confVw = new ConferenceCreateView("Oprete Konferrence", thisStage);
+		ConferenceCreateView confVw = new ConferenceCreateView(thisStage);
 		confVw.showAndWait();
 	}
 

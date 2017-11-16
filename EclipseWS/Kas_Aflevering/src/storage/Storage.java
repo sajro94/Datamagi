@@ -63,7 +63,7 @@ public class Storage {
 
 	// --------------------Hotel-------------------------
 
-	public static ArrayList<Hotel> getHotel() {
+	public static ArrayList<Hotel> getHotels() {
 		return new ArrayList<>(hotels);
 	}
 

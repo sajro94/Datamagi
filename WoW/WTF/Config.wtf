@@ -22,11 +22,7 @@ SET specular "1"
 SET groundEffectDensity "24"
 SET projectedTextures "1"
 SET realmName "Icecrown"
-<<<<<<< HEAD
-SET gameTip "21"
-=======
 SET gameTip "18"
->>>>>>> e58fde726ac75577f08015f29687b22200f85a8a
 SET screenshotQuality "10"
 SET uiScale "0.70999997854233"
 SET useUiScale "1"
