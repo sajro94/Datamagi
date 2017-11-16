@@ -5,10 +5,10 @@ NxCData = {
 		["Crossroads"] = true,
 		["Undercity"] = true,
 		["Hammerfall"] = true,
-		["Ratchet"] = true,
-		["Thunder Bluff"] = true,
-		["Camp Taurajo"] = true,
 		["Tarren Mill"] = true,
+		["Thunder Bluff"] = true,
+		["Ratchet"] = true,
+		["Camp Taurajo"] = true,
 		["Orgrimmar"] = true,
 	},
 }

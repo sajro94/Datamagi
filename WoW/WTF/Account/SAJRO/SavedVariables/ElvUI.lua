@@ -5,7 +5,7 @@ ElvDB = {
 	},
 	["gold"] = {
 		["Icecrown"] = {
-			["Ahard"] = 15053,
+			["Ahard"] = 487,
 		},
 	},
 	["namespaces"] = {
@@ -76,6 +76,14 @@ ElvDB = {
 						["g"] = 0.1,
 						["r"] = 0.1,
 					},
+				},
+			},
+			["actionbar"] = {
+				["bar2"] = {
+					["enabled"] = true,
+					["mouseover"] = true,
+					["buttonsPerRow"] = 4,
+					["visibility"] = "",
 				},
 			},
 			["general"] = {
