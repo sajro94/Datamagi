@@ -22,7 +22,12 @@ public class ConferenceCreateView extends Stage {
 
 	private Conference conference;
 
-	public ConferenceCreateView(String title, Stage owner) {
+	public Conference getConference() {
+		return conference;
+	}
+
+	public ConferenceCreateView(Stage owner) {
+
 		initOwner(owner);
 		initStyle(StageStyle.DECORATED);
 		initModality(Modality.APPLICATION_MODAL);
@@ -30,7 +35,7 @@ public class ConferenceCreateView extends Stage {
 		setMinWidth(300);
 		setResizable(false);
 
-		setTitle(title);
+		setTitle("Conference Creation");
 		GridPane pane = new GridPane();
 		initContent(pane);
 
@@ -47,8 +52,6 @@ public class ConferenceCreateView extends Stage {
 	// -----TextFields-----
 	private TextField txfName;
 	private TextField txfLocation;
-	private TextField txfStartDate;
-	private TextField txfEndDate;
 	private TextField txfPrice;
 	// -----Buttons-----
 	private Button btnCreate;
@@ -58,12 +61,10 @@ public class ConferenceCreateView extends Stage {
 
 	private void initContent(GridPane pane) {
 		pane.setGridLinesVisible(false);
-		// set padding of the pane
 		pane.setPadding(new Insets(20));
-		// set horizontal gap between components
 		pane.setHgap(10);
-		// set vertical gap between components
 		pane.setVgap(10);
+		// -----Actual initialization-----
 		initTextFields();
 		btnCreate = new Button("Opret");
 		dtpckEnd = new DatePicker(LocalDate.now());
@@ -91,35 +92,48 @@ public class ConferenceCreateView extends Stage {
 		if (allFilledCorrectly()) {
 			conference = new Conference(txfName.getText().trim(), txfLocation.getText().trim(), dtpckStart.getValue(),
 					dtpckEnd.getValue(), Double.parseDouble(txfPrice.getText().trim()));
-
-		} else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Missing Info");
-			alert.setContentText(
-					"Der er manglende informationer, eller information skrevet forkert, tjek især datoer.");
-			alert.showAndWait();
+			openConferenceInfoView();
 		}
+	}
+
+	private void openConferenceInfoView() {
+		ConferenceInfoView confInfoVw = new ConferenceInfoView(this, conference);
+		confInfoVw.showAndWait();
 	}
 
 	private boolean allFilledCorrectly() {
 		String regexPrice = "^\\d+\\.\\d{2}$";
+		boolean tester = true;
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Form Fejl");
+		String content = "";
 		if (txfLocation.getText().equals("")) {
-			return false;
+			tester = false;
+			content += String.format("Sted er ikke udfyldt.%n");
 		}
 		if (txfName.getText().equals("")) {
-			return false;
+			tester = false;
+			content += String.format("Navn er ikke udfyldt.%n");
 		}
 		if (!txfPrice.getText().trim().matches(regexPrice)) {
-			return false;
+			tester = false;
+			content += String.format(
+					"Pris er ikke udfyldt, skal skrives som et kommatal med . som komma, maks to cifre efter komma.%n");
 		}
-		return true;
+		if (!dtpckEnd.getValue().isAfter(dtpckStart.getValue())) {
+			tester = false;
+			content += String.format("Slutdato skal være senere end startdato.%n");
+		}
+		if (!tester) {
+			alert.setContentText(content);
+			alert.showAndWait();
+		}
+		return tester;
 	}
 
 	private void initTextFields() {
 		txfName = new TextField();
 		txfLocation = new TextField();
-		txfStartDate = new TextField("yyyy/mm/dd");
-		txfEndDate = new TextField("yyyy/mm/dd");
 		txfPrice = new TextField();
 	}
 

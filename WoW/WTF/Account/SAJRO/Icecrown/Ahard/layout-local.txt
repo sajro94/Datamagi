@@ -14,12 +14,21 @@ Y: 0
 W: 365
 H: 240
 Frame: NxHUD
+<<<<<<< HEAD
+FrameLevel: 18
+Anchor: TOP
+X: 0
+Y: -184
+W: 93
+H: 40
+=======
 FrameLevel: 31
 Anchor: TOP
 X: 0
 Y: -184
 W: 92
 H: 36
+>>>>>>> e58fde726ac75577f08015f29687b22200f85a8a
 Frame: NxMap1
 FrameLevel: 129
 Anchor: TOPRIGHT
@@ -34,6 +43,15 @@ X: -146
 Y: 147
 W: 196
 H: 19
+<<<<<<< HEAD
+Frame: AuctionFrame
+FrameLevel: 38
+Anchor: TOPLEFT
+X: 0
+Y: -104
+W: 832
+H: 447
+=======
 Frame: MI2_OptionsFrame
 FrameLevel: 1
 Anchor: CENTER
@@ -41,3 +59,4 @@ X: 0
 Y: 0
 W: 490
 H: 530
+>>>>>>> e58fde726ac75577f08015f29687b22200f85a8a

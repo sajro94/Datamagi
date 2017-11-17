@@ -5,7 +5,11 @@ SET questLogCollapseFilter "-1"
 SET trackedQuests "v"
 SET trackedAchievements "v"
 SET cameraSavedDistance "12.001200"
+<<<<<<< HEAD
+SET cameraSavedPitch "23.849995"
+=======
 SET cameraSavedPitch "35.622791"
+>>>>>>> e58fde726ac75577f08015f29687b22200f85a8a
 SET showKeyring "1"
 SET playerStatLeftDropdown "PLAYERSTAT_BASE_STATS"
 SET playerStatRightDropdown "PLAYERSTAT_MELEE_COMBAT"

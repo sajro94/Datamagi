@@ -5,7 +5,11 @@ ElvDB = {
 	},
 	["gold"] = {
 		["Icecrown"] = {
+<<<<<<< HEAD
+			["Ahard"] = 187,
+=======
 			["Ahard"] = 487,
+>>>>>>> e58fde726ac75577f08015f29687b22200f85a8a
 		},
 	},
 	["namespaces"] = {
@@ -27,18 +31,18 @@ ElvDB = {
 			["bags"] = {
 				["bagSize"] = 40,
 				["bagWidth"] = 542,
-				["bagBar"] = {
-					["showBackdrop"] = true,
-					["size"] = 24,
-					["spacing"] = 10,
-					["mouseover"] = true,
-					["backdropSpacing"] = 10,
-					["growthDirection"] = "HORIZONTAL",
-				},
+				["bankSize"] = 40,
 				["ignoredItems"] = {
 					["skinning"] = "skinning",
 				},
-				["bankSize"] = 40,
+				["bagBar"] = {
+					["showBackdrop"] = true,
+					["growthDirection"] = "HORIZONTAL",
+					["spacing"] = 10,
+					["backdropSpacing"] = 10,
+					["mouseover"] = true,
+					["size"] = 24,
+				},
 			},
 			["hideTutorial"] = 1,
 			["layoutSet"] = "tank",
@@ -60,30 +64,35 @@ ElvDB = {
 				},
 				["colors"] = {
 					["auraBarBuff"] = {
-						["r"] = 1,
-						["g"] = 0.49,
 						["b"] = 0.04,
+						["g"] = 0.49,
+						["r"] = 1,
 					},
 					["healthclass"] = true,
 					["castClassColor"] = true,
 					["castColor"] = {
-						["b"] = 0.1,
-						["g"] = 0.1,
 						["r"] = 0.1,
+						["g"] = 0.1,
+						["b"] = 0.1,
 					},
 					["health"] = {
-						["b"] = 0.1,
-						["g"] = 0.1,
 						["r"] = 0.1,
+						["g"] = 0.1,
+						["b"] = 0.1,
 					},
 				},
 			},
 			["actionbar"] = {
 				["bar2"] = {
 					["enabled"] = true,
+<<<<<<< HEAD
+					["buttonsPerRow"] = 4,
+					["visibility"] = "[mounted]hide;show",
+=======
 					["mouseover"] = true,
 					["buttonsPerRow"] = 4,
 					["visibility"] = "",
+>>>>>>> e58fde726ac75577f08015f29687b22200f85a8a
 				},
 			},
 			["general"] = {
@@ -95,9 +104,9 @@ ElvDB = {
 					},
 				},
 				["valuecolor"] = {
-					["r"] = 1,
-					["g"] = 0.49,
 					["b"] = 0.04,
+					["g"] = 0.49,
+					["r"] = 1,
 				},
 			},
 		},

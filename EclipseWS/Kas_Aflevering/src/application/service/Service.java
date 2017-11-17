@@ -59,6 +59,16 @@ public class Service {
 		return hotel;
 	}
 
+	public static Hotel createHotel(Hotel hotel) {
+		String name = hotel.getName();
+		String address = hotel.getAddress();
+		double priceDouble = hotel.getPriceDouble();
+		double priceSingle = hotel.getPriceSingle();
+		Hotel hotelNew = new Hotel(name, address, priceDouble, priceSingle);
+		Storage.addHotel(hotelNew);
+		return hotelNew;
+	}
+
 	public static void deleteHotel(Hotel hotel) {
 		Storage.removeHotel(hotel);
 	}
